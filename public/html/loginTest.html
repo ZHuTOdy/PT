@@ -1,0 +1,148 @@
+<meta charset="utf-8" />
+<title>汇流通用数据处理平台</title>
+	<!-- top-left -->
+		<div >
+			<h4 style="display:inline;">汇流通用数据处理平台</h4>
+			<h6 style="display:inline;">&nbsp;&nbsp;3.1.1</h6>
+		</div>
+	</div>
+	
+		<ul class="inline-list">
+			<li class="subheader"><strong ></strong>您好！
+			</li>
+
+		</ul>
+	</div>
+	<hr />
+</div>
+
+					<form class="login_form" name="loginForm">
+						<fieldset>
+							<legend class="subheader">用户登录</legend>
+							<div class="row">
+								<div class="large-12 columns ">
+									<div class="inline"><input id="userName"
+											data-bind='value: name, valueUpdate: "afterkeydown"' type="text"
+											placeholder="输入手机号"></div>
+								</div>
+								<div class="columns">
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-12 columns ">
+									<div class="inline"><input id="password" data-bind="value: password" type="password"
+											placeholder="输入密码"></div>
+								</div>
+								<div class="columns">
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-8 columns ">
+									<div class="inline"><input id="PIN" type="text" placeholder="输入验证码"></div>
+								</div>
+								<div class="large-4 columns ">
+									<a href="#" id="get_PIN" class="tiny button success radius">获取验证码</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-2 columns">
+								</div>
+								<div class="small-4 columns">
+									<a href="#" data-reveal-id="forgetModal">&nbsp;&nbsp;&nbsp;&nbsp;忘记密码</a>
+								</div>
+								<div class="small-2 columns">
+								</div>
+								<div class="small-4 columns"><a id="mo_password">修改密码</a></div>
+							</div>
+							<!-- 忘记密码 -->
+							<div id="forgetModal" class="reveal-modal small selectable" data-reveal>
+								<div class="row">
+									<div class="small-3 columns"><label for="username_forget"
+											class="inline right">工号:</label></div>
+									<div class="small-5 columns"><input type="text" id="username_forget"
+											placeholder="输入工号"></input></div>
+									<div class="small-4 columns"></div>
+								</div>
+								<div class="row">
+									<div class="small-3 columns"><label for="code" class="inline right">验证码:</label>
+									</div>
+									<div class="small-5 columns"><input type="text" id="code"
+											placeholder="输入钉钉收到的验证码"></input></div>
+									<div class="small-4 columns"><input type="button" id="get_code"
+											value="获取验证码"></input></div>
+								</div>
+
+								<div class="row">
+									<div class="small-3 columns"><label for="resetpassword"
+											class="inline right">重置密码:</label></div>
+									<div class="small-5 columns"><label for="resetpassword"
+											class="inline left">12345</label></div>
+									<div class="small-4 columns"></div>
+								</div>
+
+								
+									<div class="small-9 columns"><a id="resetBtn" type="button"
+											class="success button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认重置密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+									</div>
+								
+								<a class="close-reveal-modal">&#215;</a>
+							</div>
+							
+							<div id="forgetModal-2" class="reveal-modal tiny" data-reveal>
+								<span>重置密码成功!!!!!!</span>
+								<a class="close-reveal-modal">&#215;</a>
+							</div>
+
+
+
+							<div class="row">
+								<div class="small-6 columns">
+									<a href="#" id="login"
+										class="button success radius">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+									<!--
+									<label for="checkbox1"><input type="checkbox" id="checkbox1" ><span class="custom checkbox"></span> 记住密码</label>
+									-->
+								</div>
+								<div class="small-6 text-right columns">
+									<a id="reset" href="#"
+										class="button radius">重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置</a>
+									<!--
+									<label for="checkbox2"><input type="checkbox" id="checkbox2" ><span class="custom checkbox"></span> 自动登录</label>
+									-->
+								</div>
+							</div>
+
+						</fieldset>
+					</form>
+				</div>
+			</div>
+	</div>
+
+</div>
+
+<!-- footer -->
+
+<div class="row">
+	<hr />
+	<div class="large-9 columns">
+		<h6 class="subheader">Powered by i-confluence | Copyright © . All rights reserved.</h4>
+	</div>
+	<div class="large-3 columns">
+		<div class="row">
+			<!--
+				<ul class="inline-list">
+				  <li></li>
+				  <li><a href="#">关于我们</a></li>
+				  <li><a href="#">|</a></li>
+				  <li><a href="#">问题反馈</a></li>
+				  <li><a href="#">|</a></li>
+				</ul>
+			-->
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="loginTest.js">
+</script>

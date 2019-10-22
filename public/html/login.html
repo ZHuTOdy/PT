@@ -1,0 +1,78 @@
+<style type="text/css" media="screen">
+  body {
+    background: url("/img/timg.jpg");
+    background-size: 100%;
+  }
+
+  #login {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    width: 20%;
+  }
+
+  #login .ivu-input-wrapper,
+  #login .ivu-btn-long {
+    margin: 10px;
+  }
+
+  .loginBtn {
+    width: 100%;
+  }
+</style>
+
+<div id="login">
+  <el-form ref="form" :model="formInline">
+    <el-form-item prop="code">
+      <el-input type="text" v-model="formInline.code" placeholder="工号">
+      </el-input>
+    </el-form-item>
+    <el-form-item prop="password">
+      <el-input type="password" v-model="formInline.password" placeholder="密码">
+      </el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" class="loginBtn" @click="handleSubmit('formInline')" long>登陆</el-button>
+    </el-form-item>
+  </el-form>
+</div>
+
+
+<script>
+  var login = new Vue({
+    el: "#login",
+    data: {
+      formInline: {
+        code: '',
+        password: ''
+      }
+    },
+    methods: {
+      handleSubmit(name) {
+        var that = this;
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",this.formInline)
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",socket.emit)
+        socket.emit("user.login",this.formInline, function (res) {
+          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",res);
+          $('#mainframe').load('./main.html');
+        })
+        // $api("/user/login", this.formInline, function (aa) {
+        //   if (aa.status == "fail") {
+        //     return alert(aa.data.errMsg);
+        //   } else if (+aa.data == 0) {
+        //     return alert("用户或密码错误");
+        //   }
+        //   window.ic_sms || (window.ic_sms = {});
+        //   window.ic_sms.user || (window.ic_sms.user = {});
+        //   window.ic_sms.user = that.formInline;
+        //   $('#mainframe').load('html/main.html');
+        // })
+      }
+    }
+  })
+
+
+  var restart = function(){
+    alert("重启系统!");
+  }
+</script>
