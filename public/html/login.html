@@ -53,7 +53,7 @@
         console.log("formInline:",this.formInline)
         console.log("socket.emit:",socket.emit)
         socket.emit("user.login",this.formInline, function (res) {
-          $('#mainframe').load('./main.html');
+          console.log("res:",res);
           $('#mainframe').load('html/main.html');
         })
         // $api("/user/login", this.formInline, function (aa) {
