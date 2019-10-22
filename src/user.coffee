@@ -68,10 +68,10 @@ delete_user = (req)->
 
 
 login = (req)->
-  console.log "loginloginloginloginlogin"
+  console.log "login"
   username = req.data[0] || "" #客户端发送过来的第一个参数
   password = req.data[1] || "" 
-  console.log "usernameusernameusernameusername:",username
+  console.log "username:",username
   # page = req.data[1] #客户端发送过来的第二个参数
   # size = req.data[2]
   result = {}

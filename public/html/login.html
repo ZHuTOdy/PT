@@ -50,11 +50,11 @@
     methods: {
       handleSubmit(name) {
         var that = this;
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",this.formInline)
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",socket.emit)
+        console.log("formInline:",this.formInline)
+        console.log("socket.emit:",socket.emit)
         socket.emit("user.login",this.formInline, function (res) {
-          console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:",res);
           $('#mainframe').load('./main.html');
+          $('#mainframe').load('html/main.html');
         })
         // $api("/user/login", this.formInline, function (aa) {
         //   if (aa.status == "fail") {

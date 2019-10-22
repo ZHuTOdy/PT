@@ -11,7 +11,7 @@ var moment = require('moment');
 var sprintf = require("sprintf-js").sprintf;
 
 process.env.app = process.env.app || ospath.basename(__dirname);
-process.env.log_path = process.env.log_path || '/var/log/nodejs/';
+process.env.log_path = process.env.log_path || '/Users/todyzhu/Documents/log/nodejs/';
 
 //moment.locale('zh-cn');
 

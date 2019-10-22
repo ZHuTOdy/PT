@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<head>
+    <title>招聘计划</title>
+    <style>
+        #plan {
+            width: 300px;
+            float: left;
+        }
+
+        #year {
+            width: 300px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="plan">
+        <span>权限级别：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择">
+                <el-option v-for="item in options_1" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="year">
+        <span>年份：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="month">
+        <span>月份：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="planTable">
+        <template>
+            <el-table :data="planTable" style="width: 100%" height="250">
+                <el-table-column fixed prop="date" label="日期" width="150">
+                </el-table-column>
+                <el-table-column prop="name" label="姓名" width="120">
+                </el-table-column>
+                <el-table-column prop="province" label="省份" width="120">
+                </el-table-column>
+                <el-table-column prop="city" label="市区" width="120">
+                </el-table-column>
+                <el-table-column prop="address" label="地址" width="300">
+                </el-table-column>
+                <el-table-column prop="zip" label="邮编" width="120">
+                </el-table-column>
+            </el-table>
+        </template>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+            :page-sizes="[5, 10, 20, 40]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+    </div>
+
+
+    <script>
+        var plan = new Vue({
+            el: "#plan",
+            data: {
+                options_1: [{
+                    value: 'op1',
+                    label: '一码'
+                }, {
+                    value: 'op2',
+                    label: '二码'
+                }],
+                value: ''
+            }
+        });
+        var year = new Vue({
+            el: "#year",
+            data: {
+                options: [{
+                    value: '2019',
+                    label: '2019'
+                }, {
+                    value: '2020',
+                    label: '2020'
+                }, {
+                    value: '2021',
+                    label: '2021'
+                }, {
+                    value: '2022',
+                    label: '2022'
+                }, {
+                    value: '2023',
+                    label: '2023'
+                }, {
+                    value: '2024',
+                    label: '2024'
+                }, {
+                    value: '2025',
+                    label: '2025'
+                }, {
+                    value: '2026',
+                    label: '2026'
+                }, {
+                    value: '2027',
+                    label: '2027'
+                }, {
+                    value: '2028',
+                    label: '2028'
+                }, {
+                    value: '2029',
+                    label: '2029'
+                }, {
+                    value: '2030',
+                    label: '2030'
+                }],
+                value: ''
+            }
+        });
+        var month = new Vue({
+            el: "#month",
+            data: {
+                options: [{
+                    value: '01',
+                    label: '一月'
+                }, {
+                    value: '02',
+                    label: '二月'
+                }, {
+                    value: '03',
+                    label: '三月'
+                }, {
+                    value: '04',
+                    label: '四月'
+                }, {
+                    value: '05',
+                    label: '五月'
+                }, {
+                    value: '06',
+                    label: '六月'
+                }, {
+                    value: '07',
+                    label: '七月'
+                }, {
+                    value: '08',
+                    label: '八月'
+                }, {
+                    value: '09',
+                    label: '九月'
+                }, {
+                    value: '10',
+                    label: '十月'
+                }, {
+                    value: '11',
+                    label: '十一月'
+                }, {
+                    value: '12',
+                    label: '十二月'
+                }],
+                value: ''
+            }
+        });
+    </script>
+</body>
+<script src="/js/business/planTable.js"></script>
