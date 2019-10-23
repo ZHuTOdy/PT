@@ -45,6 +45,9 @@
 
   global.user_db.bind("users"); //使用collections   users
 
+  global.user_db.bind("takeJobPlan"); //使用collections   takeJobPlan
+
+  
   // global.user_db.bind "test" #使用collections  test
 
   //数据库游标，防止内存溢出
@@ -84,5 +87,7 @@
   };
 
   require("./user");
+
+  require("./takeJob");
 
 }).call(this);

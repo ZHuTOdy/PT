@@ -35,7 +35,7 @@ init_list = ()->
   page = userVue.$data.page
   pageSize = userVue.$data.pageSize
   socket.emit "user.list", {}, page, pageSize, (res)->
-    console.log "resresres:",res
+    console.log "user.res:",res
     return alert( res.err ) if res.err
     Object.assign( userVue.$data, res ) 
     # userVue.$data.users = res || [] 

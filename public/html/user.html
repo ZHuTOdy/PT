@@ -14,14 +14,8 @@
       </template>
     </el-table-column>
   </el-table>
-  <el-pagination 
-    @size-change="handleSizeChange" 
-    @current-change="handleCurrentChange" 
-    :current-page="page"
-    :page-sizes="[5, 10, 20, 40]"
-    :page-size="pageSize"
-    layout="total, sizes, prev, pager, next, jumper" 
-    :total="total">
+  <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+    :page-sizes="[5, 10, 20, 40]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
   </el-pagination>
 
 
@@ -55,8 +49,8 @@
 
 
 
-<div id="user_add">
-</div>
+  <div id="user_add">
+  </div>
 
 
 

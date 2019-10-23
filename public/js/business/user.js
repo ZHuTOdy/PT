@@ -46,7 +46,7 @@
     page = userVue.$data.page;
     pageSize = userVue.$data.pageSize;
     return socket.emit("user.list", {}, page, pageSize, function(res) {
-      console.log("resresres:", res);
+      console.log("user.res:", res);
       if (res.err) {
         return alert(res.err);
       }
@@ -59,7 +59,3 @@
   init_list();
 
 }).call(this);
-
-
-//# sourceMappingURL=user.js.map
-//# sourceURL=coffeescript

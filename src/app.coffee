@@ -34,6 +34,8 @@ app.use "/", express_static public_dir #浏览器静态页面路径
 mongo_url = "mongodb://test:test@127.0.0.1:27017/test_user?authSource=admin"
 global.user_db = mongo.db mongo_url, {useNewUrlParser: true}
 global.user_db.bind "users"  #使用collections   users
+global.user_db.bind "takeJobPlan"  #使用collections   takeJobPlan
+
 # global.user_db.bind "test" #使用collections  test
 
 
@@ -60,3 +62,4 @@ global.succeeRes = (items, page, pageSize, total)->
   return result
 
 require "./user"
+require "./takeJob"
