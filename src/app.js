@@ -7,10 +7,11 @@
 
   path = require("path");
 
-  // fs = require 'fs' 
-  // async = require 'async'
-  // moment = require 'moment'
+  global.ObjectId = require('mongodb').ObjectId;
 
+  global.moment = require('moment');
+
+  
   //socket.io選項
   io_options = {
     'flash policy port': -1,
@@ -47,7 +48,8 @@
 
   global.user_db.bind("takeJobPlan"); //使用collections   takeJobPlan
 
-  
+  global.user_db.bind("takeJobChannel");
+
   // global.user_db.bind "test" #使用collections  test
 
   //数据库游标，防止内存溢出

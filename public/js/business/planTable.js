@@ -176,7 +176,6 @@
       },
       delete_plan: (index, data) => {
         var query;
-        console.log("delete_plan::", data);
         query = {
           permission: data.permission,
           date: data.date,
@@ -188,14 +187,14 @@
       },
       add_plan: function() {
         return socket.emit("takeJob.add_plan", planTable.$data.aPlan, function(res) {
-          console.log("add_user.res::", res);
           planTable.$data.dialogVisible = false;
           return init_list();
         });
       },
       update_plan: function(allNumber, remarks) {
         console.log("allNumber::", allNumber);
-        return console.log("remarks::", remarks);
+        console.log("remarks::", remarks);
+        return init_list();
       }
     }
   });

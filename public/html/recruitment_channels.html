@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<head>
+    <title>招聘渠道</title>
+    <style>
+        .text {
+            height: 20px;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="channelTable">
+        <el-button type="primary" @click="dialogVisible = true">增加一行</el-button>
+        <div class="text"></div>
+        <template>
+            <el-table :data="items" style="width: 100%;" :default-sort="{prop: 'updateDate', order: 'descending'}"
+                stripe border>
+                <el-table-column fixed prop="websiteName" label="网站名称" width="120">
+                </el-table-column>
+                <el-table-column prop="URL" label="网址" width="160">
+                </el-table-column>
+                <el-table-column prop="ID" label="账号" width="130">
+                </el-table-column>
+                <el-table-column prop="password" label="密码" width="120">
+                </el-table-column>
+                <el-table-column prop="orMoney" label="是否收费" width="120" sortable>
+                </el-table-column>
+                <el-table-column prop="effect" label="招聘效果" width="120">
+                </el-table-column>
+                <el-table-column prop="orUse" label="是否使用中" width="120" sortable>
+                </el-table-column>
+                <el-table-column prop="remarks" label="其他说明" width="120">
+                </el-table-column>
+                <el-table-column prop="updateDate" label="招聘信息更新时间" width="160" sortable>
+                </el-table-column>
+                <el-table-column prop="updateUser" label="更新人" width="80">
+                </el-table-column>
+                <el-table-column label="操作" width="180">
+                    <template slot-scope="scope">
+                        <el-button size="mini" @click="handleEditCopy(scope.$index, scope.row)">
+                            <i class="el-icon-edit">修改</i>
+                        </el-button>
+                        <el-button size="mini" @click="handleDelete(scope.$index,scope.row)">
+                            <i class="el-icon-delete">删除</i>
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </template>
+        <div class="text"></div>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+            :page-sizes="[5, 10, 20, 40]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+
+        <el-dialog title="新增渠道" :visible.sync="dialogVisible" :model="aChannel">
+            <div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.websiteName"><template slot="prepend">网站名称:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.URL"><template slot="prepend">网址:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.ID"><template slot="prepend">账号:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.password"><template slot="prepend">密码:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.orMoney"><template slot="prepend">是否收费:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.effect"><template slot="prepend">招聘效果:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.orUse"><template slot="prepend">是否使用中:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="aChannel.remarks"><template slot="prepend">其他说明:</template></el-input>
+                    </el-col>
+                </el-row>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取消</el-button>
+                <el-button @click="handleAdd">确定</el-button>
+            </span>
+        </el-dialog>
+
+        <el-dialog title="修改信息" :visible.sync="dialogVisible_edit" :model="editChannel">
+            <div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.websiteName"><template slot="prepend">网站名称:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.URL"><template slot="prepend">网址:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.ID"><template slot="prepend">账号:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.password"><template slot="prepend">密码:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.orMoney"><template slot="prepend">是否收费:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.effect"><template slot="prepend">招聘效果:</template></el-input>
+                    </el-col>
+                </el-row>
+                <div id="text">
+                    <p></p>
+                </div>
+                <el-row>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.orUse"><template slot="prepend">是否使用中:</template></el-input>
+                    </el-col>
+                    <el-col :span="8">
+                        <el-input v-model="editChannel.remarks"><template slot="prepend">其他说明:</template></el-input>
+                    </el-col>
+                </el-row>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible_edit = false">取消</el-button>
+                <el-button @click="handleEdit">确定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</body>
+
+<script src="/js/business/channelTable.js"></script>

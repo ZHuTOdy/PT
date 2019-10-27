@@ -1,9 +1,10 @@
 require './log'
 mongo = require "mongoskin" 
 path = require "path"
+global.ObjectId = require('mongodb').ObjectId;
 # fs = require 'fs' 
 # async = require 'async'
-# moment = require 'moment'
+global.moment = require 'moment'
 # 
 
 
@@ -35,6 +36,7 @@ mongo_url = "mongodb://test:test@127.0.0.1:27017/test_user?authSource=admin"
 global.user_db = mongo.db mongo_url, {useNewUrlParser: true}
 global.user_db.bind "users"  #使用collections   users
 global.user_db.bind "takeJobPlan"  #使用collections   takeJobPlan
+global.user_db.bind "takeJobChannel"
 
 # global.user_db.bind "test" #使用collections  test
 

@@ -89,12 +89,12 @@
         },
         {
           title: "招聘渠道",
-          type: "5-1",
+          type: "5-2",
           link: "/html/recruitment_channels.html"
         },
         {
           title: "简历库",
-          type: "5-1",
+          type: "5-3",
           link: "/html/resume.html"
         }
       ]

@@ -138,18 +138,17 @@ planTable = new Vue({
             planTable.$data.page = page
             init_list()
         delete_plan: (index, data)=>
-            console.log "delete_plan::", data
             query = {permission: data.permission, date: data.date, projectID: data.projectID }
             socket.emit "takeJob.delete_plan", query, (res)->
                 init_list()
         add_plan: ()->
             socket.emit "takeJob.add_plan", planTable.$data.aPlan, (res)->
-                console.log "add_user.res::",res
                 planTable.$data.dialogVisible = false
                 init_list()
         update_plan: (allNumber, remarks)->
             console.log "allNumber::", allNumber
             console.log "remarks::", remarks
+            init_list()
 })
 
 init_list = ()->

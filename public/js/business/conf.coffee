@@ -21,8 +21,8 @@ window.menuList = [
   ]},
   {title: "招聘管理", type: "5", subMenu: [
     {title: "招聘计划", type: "5-1", link: "/html/recruitment_plan.html"},
-    {title: "招聘渠道", type: "5-1", link: "/html/recruitment_channels.html"},
-    {title: "简历库", type: "5-1", link: "/html/resume.html"},
+    {title: "招聘渠道", type: "5-2", link: "/html/recruitment_channels.html"},
+    {title: "简历库", type: "5-3", link: "/html/resume.html"},
   ]}
 ]
 

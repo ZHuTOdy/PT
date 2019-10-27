@@ -17,13 +17,15 @@
             width: 300px;
             float: left;
         }
+
         /* #planTable {
             float: left;
         } */
-        #select{
+        #select {
             height: 70px;
         }
-        #text{
+
+        .text {
             height: 20px;
             width: 100px;
         }
@@ -31,36 +33,36 @@
 </head>
 
 <body>
-        <div id="plan">
-            <span>权限级别：</span>
-            <template>
-                <el-select v-model="value" placeholder="请选择" @change="handleChange">
-                    <el-option v-for="item in options_1" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
-            </template>
-        </div>
-        <div id="year">
-            <span>年份：</span>
-            <template>
-                <el-select v-model="value" placeholder="请选择" @change="handleChange">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
-            </template>
-        </div>
-        <div id="month">
-            <span>月份：</span>
-            <template>
-                <el-select v-model="value" placeholder="请选择" @change="handleChange">
-                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                    </el-option>
-                </el-select>
-            </template>
-        </div>
+    <div id="plan">
+        <span>权限级别：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择" @change="handleChange">
+                <el-option v-for="item in options_1" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="year">
+        <span>年份：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择" @change="handleChange">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="month">
+        <span>月份：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择" @change="handleChange">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
     <div id="planTable">
         <el-button type="primary" @click="dialogVisible = true">增加一行</el-button>
-        <div id = "text"></div>
+        <div class="text"></div>
         <template>
             <el-table :data="items" style="width: 100%;" :default-sort="{prop: 'projectID', order: 'descending'}"
                 show-summary stripe border>
@@ -82,7 +84,7 @@
                 </el-table-column>
                 <el-table-column prop="Number_study" label="在培人数" width="120" sortable>
                 </el-table-column>
-                <el-table-column prop="remarks" label="备注" width="153" height>
+                <el-table-column prop="remarks" label="备注" width="153">
                 </el-table-column>
                 <el-table-column label="操作" width="180">
                     <template slot-scope="scope">
@@ -96,6 +98,7 @@
                 </el-table-column>
             </el-table>
         </template>
+        <div class="text"></div>
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
             :page-sizes="[5, 10, 20, 40]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
             :total="total">
@@ -111,9 +114,9 @@
                         <el-input v-model="aPlan.projectID"><template slot="prepend">项目:</template></el-input>
                     </el-col>
                 </el-row>
-                <div id = "text">
-                        <p></p>
-                    </div>
+                <div class="text">
+                    <p></p>
+                </div>
                 <el-row>
                     <el-col :span="12">
                         <el-input v-model="aPlan.remarks"><template slot="prepend">备注:</template></el-input>
@@ -122,9 +125,9 @@
                         <el-input v-model="aPlan.AllNumber"><template slot="prepend">总需求人数:</template></el-input>
                     </el-col>
                 </el-row>
-                <div id = "text">
-                        <p></p>
-                    </div>
+                <div class="text">
+                    <p></p>
+                </div>
                 <el-row>
                     <el-col :span="12">
                         <el-input v-model="aPlan.permission"><template slot="prepend">权限:</template></el-input>
@@ -144,7 +147,7 @@
                         <el-input v-model="uPlan.AllNumber"><template slot="prepend">总需求人数:</template></el-input>
                     </el-col>
                 </el-row>
-                <div id = "text">
+                <div id="text">
                     <p></p>
                 </div>
                 <el-row>
