@@ -2,6 +2,7 @@ require './log'
 mongo = require "mongoskin" 
 path = require "path"
 global.ObjectId = require('mongodb').ObjectId;
+global.ejs = require "ejs"
 # fs = require 'fs' 
 # async = require 'async'
 global.moment = require 'moment'
@@ -37,6 +38,7 @@ global.user_db = mongo.db mongo_url, {useNewUrlParser: true}
 global.user_db.bind "users"  #使用collections   users
 global.user_db.bind "takeJobPlan"  #使用collections   takeJobPlan
 global.user_db.bind "takeJobChannel"
+global.user_db.bind "resume"
 
 # global.user_db.bind "test" #使用collections  test
 

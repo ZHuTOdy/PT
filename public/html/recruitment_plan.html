@@ -34,7 +34,7 @@
 
 <body>
     <div id="plan">
-        <span>权限级别：</span>
+        <span style="float: left; line-height: 40px;">权限级别：</span>
         <template>
             <el-select v-model="value" placeholder="请选择" @change="handleChange">
                 <el-option v-for="item in options_1" :key="item.value" :label="item.label" :value="item.value">
@@ -43,7 +43,7 @@
         </template>
     </div>
     <div id="year">
-        <span>年份：</span>
+        <span style="float: left; line-height: 40px;">年份：</span>
         <template>
             <el-select v-model="value" placeholder="请选择" @change="handleChange">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -52,7 +52,7 @@
         </template>
     </div>
     <div id="month">
-        <span>月份：</span>
+        <span style="float: left; line-height: 40px;">月份：</span>
         <template>
             <el-select v-model="value" placeholder="请选择" @change="handleChange">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -88,7 +88,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="dialogVisible_2 = true">
+                        <el-button size="mini" @click="handleEditCopy(scope.$index, scope.row)">
                             <i class="el-icon-edit">修改</i>
                         </el-button>
                         <el-button size="mini" @click="delete_plan(scope.$index,scope.row)">
@@ -108,7 +108,12 @@
             <div>
                 <el-row>
                     <el-col :span="12">
-                        <el-input v-model="aPlan.date"><template slot="prepend">日期:</template></el-input>
+                        <template>
+                            <!-- <el-input v-model="aPlan.date"><template slot="prepend">日期:</template></el-input> -->
+                            <span class="demonstration">日期</span>
+                            <el-date-picker v-model="aPlan.date" type="date" placeholder="选择日期">
+                            </el-date-picker>
+                        </template>
                     </el-col>
                     <el-col :span="12">
                         <el-input v-model="aPlan.projectID"><template slot="prepend">项目:</template></el-input>

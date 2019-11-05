@@ -24,9 +24,9 @@
       <el-aside width="200px">
         <div id="nav-menu">
           <el-menu>
-            <el-submenu :index="menu.type" v-for="menu in menuList">
+            <el-submenu :index="menu.type" v-for="menu in menuList" :key="menu.type">
               <template slot="title">{{menu.title}}</template>
-              <el-menu-item @click="selectMenu(sMenu)" :index="sMenu.type" v-for="sMenu in menu.subMenu">{{ sMenu.title }}</el-menu-item>
+              <el-menu-item @click="selectMenu(sMenu)" :index="sMenu.type" v-for="sMenu in menu.subMenu" :key="sMenu.type">{{ sMenu.title }}</el-menu-item>
             </el-submenu>
           </el-menu>
         </div>

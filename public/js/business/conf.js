@@ -3,71 +3,60 @@
 
   window.menuList = [
     {
-      title: "练习/考核",
+      title: "招聘管理",
       type: "1",
       subMenu: [
         {
-          title: "练习",
+          title: "招聘计划",
           type: "1-1",
-          link: "/html/AAA.html"
+          link: "/html/recruitment_plan.html"
         },
         {
-          title: "考核",
+          title: "招聘渠道",
           type: "1-2",
-          link: "/html/AAA.html"
+          link: "/html/recruitment_channels.html"
+        },
+        {
+          title: "简历库",
+          type: "1-3",
+          link: "/html/resume.html"
         }
       ]
     },
     {
-      // {title: "", type: "1-3", link: "/html/customerBSM.html"},
-      title: "正式录入",
+      title: "培训管理",
       type: "2",
       subMenu: [
         {
-          title: "流程介绍",
+          title: "培训名单",
           type: "2-1",
           link: "/html/AAA.html"
         },
         {
-          title: "正式录入",
+          title: "在岗率",
           type: "2-2",
-          link: "/html/AAA.html"
-        },
-        {
-          title: "产量查询",
-          type: "2-3",
-          link: "/html/AAA.html"
-        },
-        {
-          title: "错误查询",
-          type: "2-4",
-          link: "/html/AAA.html"
-        },
-        {
-          title: "客户投诉查询",
-          type: "2-5",
           link: "/html/AAA.html"
         }
       ]
     },
     {
-      title: "月度考核",
+      title: "在岗管理",
       type: "3",
       subMenu: [
         {
-          title: "考核要求",
+          title: "在岗名单",
           type: "3-1",
           link: "/html/AAA.html"
         },
         {
-          title: "开始考核",
+          title: "规则宣导记录",
           type: "3-2",
           link: "/html/AAA.html"
         }
       ]
     },
     {
-      title: "用户管理",
+      title: "PT用户管理",
       type: "4",
       subMenu: [
         {

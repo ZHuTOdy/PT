@@ -1,11 +1,12 @@
 (function() {
-  var addChannel, add_plan, deleteChannel, delete_plan, edit_channel, list, list_channel;
+  var addChannel, add_plan, deleteChannel, delete_plan, edit_channel, edit_plan, list, listResume, list_channel;
 
   list = function(req) {
     var page, pageSize, query;
     query = req.data[0] || {};
     page = req.data[1] || 1; //客户端发送过来的第二个参数
     pageSize = req.data[2] || 10;
+    console.log("查询条件：", query);
     return user_db.takeJobPlan.count(query, function(err, total) {
       if (err) {
         return req.respond({
@@ -31,7 +32,9 @@
 
   delete_plan = function(req) {
     var query;
-    query = req.data[0] || {};
+    query = {
+      _id: ObjectId(req.data[0])
+    } || {};
     return user_db.takeJobPlan.remove(query, function(err, res) {
       if (err) {
         return req.respond({
@@ -60,12 +63,32 @@
     });
   };
 
+  edit_plan = function(req) {
+    var query, set;
+    query = {
+      _id: ObjectId(req.data[0])
+    } || {};
+    set = req.data[1] || {};
+    return user_db.takeJobPlan.update(query, set, function(err, res) {
+      if (!err) {
+        console.log("修改数据成功");
+      }
+      if (err) {
+        console.log("修改数据失败");
+      }
+      return req.respond({
+        "succee": true
+      });
+    });
+  };
+
   edit_channel = function(req) {
     var query, set;
     query = {
       _id: ObjectId(req.data[0])
     } || {};
     set = req.data[1] || {};
+    set.$set.updateDate = moment().format('YYYY-MM-DD');
     return user_db.takeJobChannel.update(query, set, function(err, res) {
       if (!err) {
         console.log("修改数据成功");
@@ -147,14 +170,50 @@
     });
   };
 
+  listResume = function(req) {
+    var page, pageSize, query;
+    query = req.data[0] || {};
+    page = req.data[1] || 1;
+    pageSize = req.data[2] || 10;
+    return user_db.resume.count(query, function(err, total) {
+      if (err) {
+        console.log("listResume_err", err);
+      }
+      if (err) {
+        return req.respond({
+          err: "查询失败"
+        });
+      }
+      return toArray(user_db.resume.find(query, {}, {
+        skip: (parseInt(page) - 1) * parseInt(pageSize),
+        limit: parseInt(pageSize)
+      // sort: sort
+      }), function(err2, items) {
+        var result;
+        if (err) {
+          console.log("listResume_query_err:", err);
+        }
+        result = succeeRes(items, page, pageSize, total);
+        if (err2) {
+          return req.respond({
+            err: "查询失败"
+          });
+        }
+        return req.respond(result);
+      });
+    });
+  };
+
   pt_io.route('takeJob', {
     list: list,
     delete_plan: delete_plan,
     add_plan: add_plan,
+    edit_plan: edit_plan,
     edit_channel: edit_channel,
     list_channel: list_channel,
     deleteChannel: deleteChannel,
-    addChannel: addChannel
+    addChannel: addChannel,
+    listResume: listResume
   });
 
 }).call(this);

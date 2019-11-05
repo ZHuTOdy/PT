@@ -138,17 +138,26 @@ planTable = new Vue({
             planTable.$data.page = page
             init_list()
         delete_plan: (index, data)=>
-            query = {permission: data.permission, date: data.date, projectID: data.projectID }
-            socket.emit "takeJob.delete_plan", query, (res)->
+            _id = data._id
+            socket.emit "takeJob.delete_plan", _id , (res)->
                 init_list()
         add_plan: ()->
+            console.log("计划时间：",planTable.$data.aPlan.date)
             socket.emit "takeJob.add_plan", planTable.$data.aPlan, (res)->
                 planTable.$data.dialogVisible = false
                 init_list()
-        update_plan: (allNumber, remarks)->
-            console.log "allNumber::", allNumber
-            console.log "remarks::", remarks
-            init_list()
+        update_plan: ()->
+            _id = planTable.$data.uPlan._id
+            AllNumber = planTable.$data.uPlan.AllNumber
+            remarks = planTable.$data.uPlan.remarks
+            socket.emit "takeJob.edit_plan", _id, { "$set": {"AllNumber": AllNumber, "remarks": remarks}}, (res)->
+                planTable.$data.dialogVisible_2 = false
+                init_list()
+        handleEditCopy:(index, data)->
+            planTable.$data.uPlan._id = data._id
+            planTable.$data.uPlan.AllNumber = data.AllNumber
+            planTable.$data.uPlan.remarks = data.remarks
+            planTable.$data.dialogVisible_2 = true
 })
 
 init_list = ()->
@@ -157,8 +166,8 @@ init_list = ()->
     permission = planTable.$data.permission
     year = planTable.$data.year
     month = planTable.$data.month
-    date = year + month
-    socket.emit "takeJob.list", {"permission" : permission, "date" : date}, page, pageSize, (res)->
+    date = year + "-" + month
+    socket.emit "takeJob.list", {"permission" : permission, "date" : {$regex: date}}, page, pageSize, (res)->
         return alert( res.err ) if res.err
         Object.assign( planTable.$data, res ) 
 
