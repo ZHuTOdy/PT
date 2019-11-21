@@ -1,22 +1,28 @@
-(function() {
-  var mainVue;
 
-  mainVue = new Vue({
-    el: "#mainVue",
-    data: {
-      menuList: window.menuList
+
+var mainVue;
+
+mainVue = new Vue({
+  el: "#mainVue",
+  data: {
+    menuList: window.menuList,
+    Loginname :"角色",
+  },
+  methods: {
+    selectMenu: function(sMenu) {
+      // that = this;
+      return $('#main-content').load(sMenu.link);
     },
-    methods: {
-      selectMenu: function(sMenu) {
-        // that = this;
-        console.log("sMenusMenusMenu:", sMenu);
-        return $('#main-content').load(sMenu.link);
-      }
+    homePageLink:function(){
+      $('#main-content').load('/html/homePage.html');
     }
-  });
 
-}).call(this);
+  }
+});
+if(login.formInline.nickname)
+  mainVue.Loginname=login.formInline.nickname
+$('#main-content').load('/html/homePage.html');
+
+  // mainVue.$parent=login;
 
 
-//# sourceMappingURL=main.js.map
-//# sourceURL=coffeescript

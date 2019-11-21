@@ -1,0 +1,59 @@
+<style type="text/css" media="screen">
+  .header .el-form-item {
+    margin-bottom: 5px;
+  }
+
+  .header .el-select {
+    width: 100%;
+  }
+</style>
+<div id="mainVue">
+  <el-container style="height: 100%;">
+    <el-header style="height: 40px;background-color: #ffffff;">
+      <el-row>
+        <el-col :span="4" style="text-align: left;">PT系统</el-col>
+        <el-col :span="8" style="text-align: left;"><a href="#"  style="color: black"   @click="homePageLink">首页</a></el-col>
+        <el-col :span="12" style="text-align: right;">
+            <el-tooltip>
+              <span>{{Loginname}}</span>
+              <!-- <div slot="content">角色<span>角色</span></div>
+              <el-button type="text"><i class="el-icon-caret-bottom"></i></el-button> -->
+          </el-tooltip>
+        </el-col>
+      </el-row>
+    </el-header>
+    <el-container>
+      <el-aside width="200px">
+        <div id="nav-menu">
+          <el-menu>
+            <el-submenu :index="menu.type" v-for="menu in menuList" :key="menu.type">
+              <template slot="title">{{menu.title}}</template>
+              <el-menu-item @click="selectMenu(sMenu)" :index="sMenu.type" v-for="sMenu in menu.subMenu" :key="sMenu.type">{{ sMenu.title }}</el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </div>
+      </el-aside>
+      <el-main>
+        <div id="main-content" style="height: 100%"> </div>
+      </el-main>
+    </el-container>
+  </el-container>
+  <!-- <template>
+    <el-backtop target=".page-component_scroll .el-scrollbar__wrap" :bottom="100">
+      <div 
+      style="
+        height: 100%;
+        width:100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0,.12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+      ">
+        UP
+      </div>
+    </el-backtop>
+  </template> -->
+</div>
+
+<script src="../js/business/main.js"></script>

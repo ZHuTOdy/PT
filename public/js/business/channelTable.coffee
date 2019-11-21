@@ -44,7 +44,8 @@ channelTable = new Vue({
                 channelTable.$data.dialogVisible_edit = false
                 init_list()
         handleAdd: ()->
-            channelTable.$data.aChannel.updateUser = "朱镕杰"
+            console.log "login.$data.formInline.nickname:",login.$data.formInline.nickname
+            channelTable.$data.aChannel.updateUser = login.$data.formInline.nickname
             socket.emit "takeJob.addChannel", channelTable.$data.aChannel, (res)->
                 channelTable.$data.dialogVisible = false
                 init_list()

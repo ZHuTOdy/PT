@@ -2,7 +2,7 @@
 // 建立日志文件 /var/log/nodejs/应用名-YYYY-MM-DD.log
 // Windows系统下日志文件位于当前磁盘的 \var\log\nodejs 目录
 if (! ''.red)
-  require('tinycolor');
+     require('tinycolor');
 var ospath = require('path');
 var fs = require('fs');
 var async = require('async');
@@ -11,7 +11,7 @@ var moment = require('moment');
 var sprintf = require("sprintf-js").sprintf;
 
 process.env.app = process.env.app || ospath.basename(__dirname);
-process.env.log_path = process.env.log_path || '/Users/todyzhu/Documents/log/nodejs/';
+process.env.log_path = process.env.log_path || '/var/log/nodejs/';
 
 //moment.locale('zh-cn');
 
@@ -97,6 +97,7 @@ setTimeout(function(){
     if ('-' === process.env.log_path) {
         console.info('log: disabled');
     } else {
+        // console.info('process.env.log_path:', process.env.log_path  );
         console.info('log:', process.env.log_path + process.env.app + '-YYYY-MM-DD.log' );
     }
 }, 0);

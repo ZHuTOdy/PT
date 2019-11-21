@@ -1,148 +1,383 @@
-<meta charset="utf-8" />
-<title>汇流通用数据处理平台</title>
-	<!-- top-left -->
-		<div >
-			<h4 style="display:inline;">汇流通用数据处理平台</h4>
-			<h6 style="display:inline;">&nbsp;&nbsp;3.1.1</h6>
-		</div>
-	</div>
-	
-		<ul class="inline-list">
-			<li class="subheader"><strong ></strong>您好！
-			</li>
+<style type="text/css" media="screen">
+	body {
+		background: url("/img/timg.jpg");
+		background-size: 100%;
+	}
 
-		</ul>
+	#loginmain {
+		position: absolute;
+		top: 20%;
+		left: 38%;
+		width: 20%;
+
+		padding-left: 40px;
+		padding-top: 40px;
+		padding-right: 40px;
+		padding-bottom: 5px;
+		/* border-style: solid;
+		border-width: 1px;
+		border-color: rgba(240, 248, 255, 0.3); */
+	}
+
+	hr {
+		width: 90%;
+		border-width: 1px;
+		border-color: rgba(240, 248, 255, 0.418);
+	}
+
+	#Logo {
+		vertical-align: bottom;
+	}
+
+	/* 设置Dialog大致为居中弹出 */
+	.el-dialog {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		margin: 0 !important;
+		transform: translate(-50%, -50%);
+	}
+
+	#login {
+		margin: 10px;
+
+	}
+
+	.loginBtn {
+		width: 100%;
+	}
+
+	.modifyDialogClass {
+		background-color: rgba(240, 240, 240, 0.8);
+	}
+
+	.forgetDialogClass {
+		background-color: rgba(240, 240, 240, 0.9);
+	}
+</style>
+
+
+<title>汇流PT管理系统</title>
+<div id="login">
+	<div id="Logo">
+		<el-row>
+			<el-col :span="8" :offset="4" style="color:rgba(240, 248, 255)"> <img src="../img/Logo.png"
+					style="width:60px;" />
+					<label style="vertical-align: bottom">&nbsp;&nbsp;&nbsp;汇流PT管理系统</label>
+					<label> &nbsp;&nbsp;1.0.0</label>
+			</el-col>
+			<el-col :span="4" :offset="8" style="color: rgba(240, 248, 255);text-align: start">
+				<label>{{formInline.username}}&nbsp;您好！</label> </el-col>
+		</el-row>
 	</div>
 	<hr />
-</div>
+	<div id="loginmain">
+		<el-form :label-position="labelposition" ref="form" :model="formInline">
+			<el-form-item prop="username">
+				<el-input type="text" id="usernameInput" v-model="formInline.username" placeholder="请输入用户名">
+				</el-input>
+			</el-form-item>
+			<el-form-item prop="password">
+				<el-input type="password" id="userpasswdInput" v-model="formInline.password" placeholder="请输入密码">
+				</el-input>
+			</el-form-item>
+			<el-form-item style="margin-bottom: 0px">
+				<el-row>
+					<el-col :span="16">
+						<el-input type="text" id="loginCode" v-model="formInline.loginCode" placeholder="请输入验证码">
+					</el-col>
+					<el-col :span="6" :offset="1">
+						<el-button @click='get_loginCode' id="get_loginCodeBtn" v-bind:type="loginBtnType"
+							style="padding-left: 2px;padding-right: 2px">获取验证码</el-button>
+					</el-col>
+				</el-row>
+			</el-form-item>
+			<div style="margin: 15px;">
+				<a href="#" style="margin-left: 3%;color:rgba(240, 248, 255, 0.6);font-size: small"
+					@click="forgetDialogVisible = true">忘记密码？</a>
+				<a href="#" style="margin-left: 43%;color:rgba(240, 248, 255, 0.6);font-size: small"
+					@click="modifyDialogVisible = true">修改密码</a>
 
-					<form class="login_form" name="loginForm">
-						<fieldset>
-							<legend class="subheader">用户登录</legend>
-							<div class="row">
-								<div class="large-12 columns ">
-									<div class="inline"><input id="userName"
-											data-bind='value: name, valueUpdate: "afterkeydown"' type="text"
-											placeholder="输入手机号"></div>
-								</div>
-								<div class="columns">
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="large-12 columns ">
-									<div class="inline"><input id="password" data-bind="value: password" type="password"
-											placeholder="输入密码"></div>
-								</div>
-								<div class="columns">
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="large-8 columns ">
-									<div class="inline"><input id="PIN" type="text" placeholder="输入验证码"></div>
-								</div>
-								<div class="large-4 columns ">
-									<a href="#" id="get_PIN" class="tiny button success radius">获取验证码</a>
-								</div>
-							</div>
-							<div class="row">
-								<div class="small-2 columns">
-								</div>
-								<div class="small-4 columns">
-									<a href="#" data-reveal-id="forgetModal">&nbsp;&nbsp;&nbsp;&nbsp;忘记密码</a>
-								</div>
-								<div class="small-2 columns">
-								</div>
-								<div class="small-4 columns"><a id="mo_password">修改密码</a></div>
-							</div>
-							<!-- 忘记密码 -->
-							<div id="forgetModal" class="reveal-modal small selectable" data-reveal>
-								<div class="row">
-									<div class="small-3 columns"><label for="username_forget"
-											class="inline right">工号:</label></div>
-									<div class="small-5 columns"><input type="text" id="username_forget"
-											placeholder="输入工号"></input></div>
-									<div class="small-4 columns"></div>
-								</div>
-								<div class="row">
-									<div class="small-3 columns"><label for="code" class="inline right">验证码:</label>
-									</div>
-									<div class="small-5 columns"><input type="text" id="code"
-											placeholder="输入钉钉收到的验证码"></input></div>
-									<div class="small-4 columns"><input type="button" id="get_code"
-											value="获取验证码"></input></div>
-								</div>
-
-								<div class="row">
-									<div class="small-3 columns"><label for="resetpassword"
-											class="inline right">重置密码:</label></div>
-									<div class="small-5 columns"><label for="resetpassword"
-											class="inline left">12345</label></div>
-									<div class="small-4 columns"></div>
-								</div>
-
-								
-									<div class="small-9 columns"><a id="resetBtn" type="button"
-											class="success button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认重置密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-									</div>
-								
-								<a class="close-reveal-modal">&#215;</a>
-							</div>
-							
-							<div id="forgetModal-2" class="reveal-modal tiny" data-reveal>
-								<span>重置密码成功!!!!!!</span>
-								<a class="close-reveal-modal">&#215;</a>
-							</div>
-
-
-
-							<div class="row">
-								<div class="small-6 columns">
-									<a href="#" id="login"
-										class="button success radius">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</a>
-									<!--
-									<label for="checkbox1"><input type="checkbox" id="checkbox1" ><span class="custom checkbox"></span> 记住密码</label>
-									-->
-								</div>
-								<div class="small-6 text-right columns">
-									<a id="reset" href="#"
-										class="button radius">重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置</a>
-									<!--
-									<label for="checkbox2"><input type="checkbox" id="checkbox2" ><span class="custom checkbox"></span> 自动登录</label>
-									-->
-								</div>
-							</div>
-
-						</fieldset>
-					</form>
-				</div>
 			</div>
+
+			<el-form-item>
+				<el-button type="primary" class="loginBtn" @click="handleSubmit('formInline')" long>
+					登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
+				</el-button>
+			</el-form-item>
+		</el-form>
 	</div>
 
-</div>
+	<el-dialog :visible.sync="forgetDialogVisible" :model="userForget" width="48%" custom-class="forgetDialogClass">
+		<div>
+			<el-row :gutter="20">
+				<el-col :span="10" :offset="4">
+					<el-input v-model="userForget.username" placeholder="输入工号"><template slot="prepend">工号:</template>
+					</el-input>
+				</el-col>
+			</el-row>
 
-<!-- footer -->
+			<el-row style="margin-top: 20px;margin-bottom: 20px" :gutter="20">
+				<el-col :span="10" :offset="4">
+					<el-input v-model="userForget.passCode" placeholder="输入钉钉收到的验证码"><template
+							slot="prepend">验证码:</template></el-input>
+				</el-col>
+				<el-col :span="4">
+					<el-button @click='get_resetCode' v-bind:type="resetBtnType" plain id="get_resetCodeBtn">获取验证码
+					</el-button>
+				</el-col>
+			</el-row>
 
-<div class="row">
-	<hr />
-	<div class="large-9 columns">
-		<h6 class="subheader">Powered by i-confluence | Copyright © . All rights reserved.</h4>
-	</div>
-	<div class="large-3 columns">
-		<div class="row">
-			<!--
-				<ul class="inline-list">
-				  <li></li>
-				  <li><a href="#">关于我们</a></li>
-				  <li><a href="#">|</a></li>
-				  <li><a href="#">问题反馈</a></li>
-				  <li><a href="#">|</a></li>
-				</ul>
-			-->
+			<el-row :gutter="20">
+				<el-col :span="10" :offset="4">
+					<label style="color: #131417;">重置密码:&nbsp;&nbsp;12345</label>
+				</el-col>
+			</el-row>
+			<el-row :gutter="20">
+				<el-col :span="13" :offset="9">
+					<el-button type="primary" @click='resetPasswd'>确认重置密码</el-button>
+				</el-col>
+
+			</el-row>
 		</div>
-	</div>
+	</el-dialog>
+
+	<el-dialog :visible.sync="modifyDialogVisible" :model="userModify" custom-class="modifyDialogClass">
+		<div>
+			<el-row :gutter="20">
+				<el-col :span="12" :offset="6">
+					<el-input v-model="userModify.username" placeholder="输入工号"><template slot="prepend">工号:</template>
+					</el-input>
+				</el-col>
+			</el-row>
+
+			<el-row style="margin-top: 20px;margin-bottom: 20px" :gutter="20">
+				<el-col :span="12" :offset="6">
+					<el-input v-model="userModify.oldPassWd" type="password" placeholder="输入原始密码"><template
+							slot="prepend">原始密码:</template></el-input>
+				</el-col>
+			</el-row>
+
+			<el-row style="margin-top: 20px;margin-bottom: 20px" :gutter="20">
+				<el-col :span="12" :offset="6">
+					<el-input v-model="userModify.newPassWd" type="password" placeholder="输入新密码"><template
+							slot="prepend">新密码:</template>
+					</el-input>
+				</el-col>
+			</el-row>
+			<el-row style="margin-top: 20px;margin-bottom: 20px" :gutter="20">
+				<el-col :span="12" :offset="6">
+					<el-input v-model="userModify.confirmPasswd" type="password" placeholder="再次输入新密码"><template
+							slot="prepend">确认新密码:</template></el-input>
+				</el-col>
+			</el-row>
+			</el-row>
+			<el-row :gutter="20">
+				<el-col :span="13" :offset="8">
+					<el-button type="success" @click="Modifypasswd" style="font-size:larger;width: 60%">修改密码</el-button>
+				</el-col>
+
+			</el-row>
+		</div>
+	</el-dialog>
 </div>
 
-<script type="text/javascript" src="loginTest.js">
+<script>
+	var login = new Vue({
+		el: "#login",
+		data: {
+			labelposition: "left",
+			forgetDialogVisible: false,
+			modifyDialogVisible: false,
+			loginIntervalID: null,
+			resetIntervalID: null,
+			loginBtnType: "success",
+			resetBtnType: "success",
+			loginSecend: 0,
+			resetSecend: 0,
+			// 登录
+			formInline: {
+				nickname: "",
+				username: '',
+				password: '',
+			},
+			// 忘记密码
+			userForget: {
+				username: "",
+				passCode: "",
+				savepassCode: ""
+			},
+			// 修改密码
+			userModify: {
+				username: "",
+				oldPassWd: "",
+				newPassWd: "",
+				confirmPasswd: ""
+			}
+		},
+		methods: {
+			handleSubmit(name) {
+				var that = this;
+				// console.log ("that:",that)
+				if (this.formInline.username.trim() == "")
+					return this.$message.warning("请输入用户名")
+				if (/P/.test(this.formInline.username)) {
+					return this.$message.warning("账号受限")
+				}
+				if (this.formInline.password.trim() == "")
+					return this.$message.warning("请输入密码")
+
+				// console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA:", this.formInline)
+				socket.emit("user.login", this.formInline, function (res) {
+					if (res.err)
+						that.$message.error(res.err)
+					else if (res.data) {
+						that.$message.success("登录成功！")
+						that.formInline.nickname = res.data.nickname;
+						that.$message.success(res.data.nickname + "登录成功！")
+						$('#mainframe').load('html/main.html');
+					}
+
+				})
+			},
+			Modifypasswd() {
+				var that = this;
+				if (this.userModify.username.trim() == "")
+					this.$message.warning("请输入工号");
+				else if (/P/.test(this.userModify.username)) {
+					return this.$message.warning("账号受限")
+				}
+				else if (this.userModify.newPassWd.trim() == "" || this.userModify.confirmPasswd.trim() == "" || this.userModify.oldPassWd.trim() == "") {
+					this.$message.error("请输入密码");
+				}
+				else if (this.userModify.newPassWd !== this.userModify.confirmPasswd) {
+					this.$message.error("两次密码输入不一致，请检查");
+				}
+				else {
+					socket.emit("user.pwdUpdate", this.userModify, function (res) {
+						console.log("res", res)
+						if (res['error'])
+							alert(res['error'])
+						else if (res['success']) {
+							alert("密码修改成功！")
+							that.modifyDialogVisible = false
+						}
+
+					});
+
+				}
+			},
+			// 获取验证码
+			get_resetCode() {
+				var that = this;
+
+				if (this.userForget.username.trim() == "") {
+					return this.$message.warning("请输入工号")
+				}
+				if (/P/.test(this.userForget.username)) {
+					return this.$message.warning("账号受限")
+				}
+				socket.emit("user.get_code", this.userForget.username, function (res) {
+					if (res.error)
+						return that.$message.error(res.error)
+					else if (res.PIN) {
+						that.userForget.savepassCode = res.PIN
+						that.$message.success("验证码发送成功,请前往钉钉查看")
+						// 验证码按钮倒计时
+						that.resetSecend = 30
+						$('#get_resetCodeBtn').text("重新发送" + that.resetSecend + "s")
+						// 设置按钮颜色为灰色
+						that.resetBtnType = "info"
+						$('#get_resetCodeBtn').attr('disabled', true)
+						that.resetIntervalID = setInterval(changeDisableBtn, 1000, "get_resetCodeBtn", that, "reset")
+						console.log("resetIntervalID:", that.resetIntervalID)
+					}
+				})
+			},
+			get_loginCode() {
+				var that = this;
+
+				// 验证码按钮倒计时
+				if (true) {
+					that.loginSecend = 30
+					$('#get_loginCodeBtn').text("重新发送" + that.loginSecend + "s")
+					// 设置按钮颜色为灰色
+					that.loginBtnType = "info"
+					$('#get_loginCodeBtn').attr('disabled', true)
+					that.loginIntervalID = setInterval(changeDisableBtn, 1000, "get_loginCodeBtn", that, "login")
+					console.log("loginIntervalID:", that.loginIntervalID)
+				}
+
+			},
+			// 确认重置密码
+			resetPasswd() {
+				var that = this
+				if (this.userForget.username.trim() == "") {
+					return this.$message.warning("请输入工号")
+				}
+				if (/P/.test(this.userForget.username)) {
+					return this.$message.warning("账号受限")
+				}
+				else if (this.userForget.passCode.trim() == "") {
+					return this.$message("请输入验证码")
+				}
+				else if (this.userForget.savepassCode !== this.userForget.passCode) {
+					return this.$message.error("验证码错误！")
+				}
+				else {
+					socket.emit("user.resetpwd", this.userForget, function (res) {
+						if (res.error)
+							return that.$message.error(res.error)
+						else if (res.success) {
+							that.userForget.passCode = ""
+							that.userForget.savepassCode = ""
+							that.forgetDialogVisible = false
+							return that.$message.success("密码已重置!")
+						}
+					})
+				}
+			}
+		}
+
+	});
+	var changeDisableBtn = function (Buttonid, that, type) {
+		if (that[type + 'Secend'] > 0) {
+			console.log("that[" + type + "Secend]:", that[type + 'Secend'])
+			that[type + 'Secend']--;
+			$('#' + Buttonid).text('重新发送' + that[type + 'Secend'] + 's');
+		}
+		else {
+			clearInterval(that[type + 'IntervalID']);
+
+			$('#' + Buttonid).text('获取验证码');
+			that[type + 'BtnType'] = "success"
+			$('#' + Buttonid).removeAttr('disabled');
+
+			that[type + 'IntervalID'] = null
+			that[type + 'Secend'] = 0;
+		}
+	}
+
+	var restart = function () {
+		alert("重启系统!");
+	}
+	$(function () {
+		$(document).keydown(function (event) {
+			if (event.keyCode == '13') {
+				$('.loginBtn').click();
+			}
+		});
+		$('#usernameInput').focus();
+		$('#usernameInput').keydown(function (event) {
+			if (event.keyCode == '13') {
+				$('#userpasswdInput').focus()
+			}
+		});
+		$('#userpasswdInput').keydown(function (event) {
+			if (event.keyCode == '13') {
+				$('.loginBtn').click();
+			}
+		});
+
+	})
 </script>

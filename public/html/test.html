@@ -31,3 +31,281 @@
     "phone" : "15913293055", 
     "dingId" : "03005066122696"
 }
+<div id="userLogin">
+        <!--top-left-->
+        <el-row >
+            <el-col :span="6">	<div><img src="../img/Logo.png" style="width:60px;"> </div></el-col>
+            <el-col :span="6"><div>	<h4 style="display:inline;">汇流通用数据处理平台</h4> <h6 style="display:inline;">&nbsp;&nbsp;3.1.1</h6> </div></el-col>		
+        <!--top-right-->
+            <el-col :span="6" :offset="6">
+                <div>
+                <el-row >
+                    <el-col :span="12" id="head_username">&nbsp;</label></el-col>
+                    <el-col :span="12" ><label>&nbsp;&nbsp;您好！</label></el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12"> <a href="#" id="userRegister">用户注册</a> </el-col>
+                    <el-col :span="12"> <a href="#" data-reveal-id="findModal" data-reveal>注册查询</a> </el-col>
+                </el-row>
+                </div>
+            </el-col>
+        </el-row>
+        <hr />
+    </div>
+    <el-row>
+            <el-col :span="7">
+            </el-col>
+            <el-col :span="10">
+                <el-form id="login_form">
+                        <el-input id="username" type="text" placeholder="输入工号"></el-input>
+                        <el-input id="password" type="password" placeholder="输入密码"></el-input>
+                        <el-input id="PIN" type="text" placeholder="输入验证码"></el-input>
+                        <el-button type="success" id="get_PIN">获取验证码</el-button>
+                        <el-link  type="primary" >&nbsp;&nbsp;&nbsp;&nbsp;忘记密码</el-link>
+                        <el-link  type="primary" >修改密码</el-link>
+                        <el-button type="primary" id="login">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button>
+        
+                </el-form>							
+            </el-col>
+            <el-col :span="7">
+            </el-col>
+        </el-row>
+
+<!-- 忘记密码 -->
+<div id="forgetModal" class="reveal-modal small selectable" data-reveal>
+        <div class="row">
+            <div class="small-3 columns"><label for="username_forget" class="inline right">工号:</label></div>
+            <div class="small-5 columns"><input type="text" id="username_forget" placeholder="输入工号"></input>
+            </div>
+            <div class="small-4 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label for="code" class="inline right">验证码:</label></div>
+            <div class="small-5 columns"><input type="text" id="code" placeholder="输入钉钉收到的验证码"></input>
+            </div>
+            <div class="small-4 columns"><input type="button" id="get_code" value="获取验证码"></input></div>
+        </div>
+
+        <div class="row">
+            <div class="small-3 columns"><label for="resetpassword" class="inline right">重置密码:</label></div>
+            <div class="small-5 columns"><label for="resetpassword" class="inline left">12345</label></div>
+            <div class="small-4 columns"></div>
+        </div>
+
+        <div class="row">
+            <div class="small-3 columns"></div>
+            <div class="small-9 columns"><a id="resetBtn" type="button"
+                    class="success button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认重置密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="forgetModal-2" class="reveal-modal tiny" data-reveal>
+        <span>重置密码成功!!!!!!</span>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <!-- 修改密码 -->
+    <div id="resetModal" class="reveal-modal small selectable" data-reveal>
+        <div class="row">
+            <div class="small-3 columns"><label for="username_reset" class="inline right">工号:</label></div>
+            <div class="small-6 columns"><input type="text" id="username_reset" placeholder="输入工号"></input>
+            </div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label for="oldpassword" class="inline right">原始密码:</label></div>
+            <div class="small-6 columns"><input type="password" id="password_reset"
+                    placeholder="输入原始密码"></input></div>
+            <div class="small-3 columns"></div>
+        </div>
+
+        <div class="row">
+            <div class="small-3 columns"><label for="newpassword-1" class="inline right">新密码:</label></div>
+            <div class="small-6 columns"><input type="password" id="newpassword-1"
+                    placeholder="输入新密码"></input></div>
+            <div class="small-3 columns" id="newpassword-1Tip"></div>
+        </div>
+
+        <div class="row">
+            <div class="small-3 columns"><label for="newpassword-2" class="inline right">确认新密码:</label>
+            </div>
+            <div class="small-6 columns"><input type="password" id="newpassword-2"
+                    placeholder="再次输入新密码"></input></div>
+            <div class="small-3 columns" id="newpassword-2Tip"></div>
+        </div>
+
+        <div class="row">
+            <div class="small-3 columns"></div>
+            <div class="small-9 columns"><a id="reviseBtn" type="button"
+                    class="success button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="resetModal-2" class="reveal-modal tiny" data-reveal>
+        <span>修改密码成功!!!!</span>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="resetModal-3" class="reveal-modal tiny" data-reveal>
+        <span>请检查工号或原密码是否正确</span>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    <!--注册查询-->
+    <div id="findModal" class="reveal-modal small selectable" data-reveal>
+        <h4>注册查询</h4>
+        <hr />
+        <!-- <form> -->
+        <div class="row">
+            <div class="small-2 columns"><label for="IDCard" class="inline right">身份证号</label></div>
+            <div class="small-7 columns"><input type="text" id="IDCard" placeholder="请检查输入的身份证号码"></input>
+            </div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"></div>
+            <div class="small-9 columns"><a id="inquiryBtn" class="button success"
+                    onclick="parent.set_data">查&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+            </div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    <!--注册查询结果-->
+    <div id="secondModal" class="reveal-modal tiny selectable" data-reveal>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">姓名：</label></div>
+            <div class="small-6 columns"><label id="nickname" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">身份证号：</label></div>
+            <div class="small-6 columns"><label id="IDCard_inquiry" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">状态：</label></div>
+            <div class="small-6 columns"><label id="status" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">工号：</label></div>
+            <div class="small-6 columns"><label id="username_find" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">初始密码：</label></div>
+            <div class="small-6 columns"><label id="pwd_find" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <div class="row">
+            <div class="small-3 columns"><label class="inline right">审核未通过原因：</label></div>
+            <div class="small-6 columns"><label id="reason" class="inline left"></label></div>
+            <div class="small-3 columns"></div>
+        </div>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <div id="secondModal-2" class="reveal-modal tiny" data-reveal>
+        <span>抱歉，您所查询的身份证还未注册<span>
+                <a class="close-reveal-modal">&#215;</a>
+    </div>
+</div>
+
+</div>
+</form>
+</div>
+
+<div class="row">
+<hr />
+<div class="large-4 columns">
+<div class="row">
+</div>
+</div>
+<div class="large-8 columns">
+<h6 class="subheader">Powered by i-confluence | Copyright ©2016 All rights reserved.</h4>
+</div>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+$(function () {
+var user = $("#username");
+user.bind({
+blur: function () {
+    $("#head_username").html($("#username").val());
+}
+});
+
+
+});
+
+
+//须知
+var nextBtn = $("#nextBtn");
+$("#regText").change(function () {
+var that = $(this);
+that.prop("checked", that.prop("checked"));
+if (that.prop("checked")) {
+nextBtn.prop("disabled", false);
+}
+else {
+nextBtn.prop("disabled", true);
+}
+});
+
+//保密协议
+var nextBtn2 = $("#nextBtn2");
+$("#regText2").change(function () {
+var that = $(this);
+that.prop("checked", that.prop("checked"));
+if (that.prop("checked")) {
+nextBtn2.prop("disabled", false);
+}
+else {
+nextBtn2.prop("disabled", true);
+}
+});
+
+bills = {};
+self.set_data = function (data) {
+bills = data.bills || {};
+console.log("注册查询data", bills);
+$("#nickname").html(bills.nickname);
+$("#IDCard_inquiry").html(bills.IDCard);
+$("#status").html(bills.status);
+$("#reason").html(bills.reason);
+if (bills.enabled) {
+$("#username_find").html(bills.username);
+$("#pwd_find").html("12345");
+}
+else {
+$("#username_find").html("");
+$("#pwd_find").html("");
+}
+if (bills.IDCard) {
+$('#secondModal').foundation('reveal', 'open');
+}
+else {
+$('#secondModal-2').foundation('reveal', 'open');
+}
+// self.update();
+}
+
+//校验
+$(document).ready(function () {
+$.formValidator.initConfig({ formID: "login_form" });
+// $("#IDCard").formValidator().functionValidator({fun:isCardID});
+$("#newpassword-1").formValidator().regexValidator({ regExp: "password", dataType: "enum", onError: "密码为数字,字母和符号的组合,长度为9-16位" })
+.inputValidator({ min: 9, max: 16, empty: { leftEmpty: false, rightEmpty: false, emptyError: "密码两边不能有空符号" }, onError: "密码长度需为9-16位" });
+$("#newpassword-2").formValidator().regexValidator({ regExp: "password", dataType: "enum", onError: "密码为数字,字母和符号的组合,长度为9-16位" })
+.inputValidator({ min: 9, max: 16, empty: { leftEmpty: false, rightEmpty: false, emptyError: "密码两边不能有空符号" }, onError: "密码长度需为9-16位" })
+.compareValidator({ desID: "newpassword-1", operateor: "=", onError: "两次密码不一致，请确认" });
+})
+window.invoice_lists = self;
+</script>

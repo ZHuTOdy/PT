@@ -11,6 +11,7 @@
       dialogVisible: false,
       aUser: {}
     },
+    
     methods: {
       handleSizeChange: function(pageSize) {
         userVue.$data.pageSize = pageSize;
@@ -46,7 +47,7 @@
     page = userVue.$data.page;
     pageSize = userVue.$data.pageSize;
     return socket.emit("user.list", {}, page, pageSize, function(res) {
-      console.log("user.res:", res);
+      console.log("resresres:", res);
       if (res.err) {
         return alert(res.err);
       }
@@ -59,3 +60,7 @@
   init_list();
 
 }).call(this);
+
+
+//# sourceMappingURL=user.js.map
+//# sourceURL=coffeescript

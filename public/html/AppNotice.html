@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head>
+    <title>录入通知</title>
+    <style>
+        #project {
+            width: 300px;
+            float: left;
+        }
+
+        #permission {
+            width: 300px;
+            float: left;
+        }
+
+        .text {
+            height: 20px;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="project">
+        <span style="float: left; line-height: 40px;">项目：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择" @change="handleChange">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+        </template>
+    </div>
+    <div id="permission">
+
+        <span style="float: left; line-height: 40px;">权限：</span>
+        <template>
+            <el-select v-model="value" placeholder="请选择" @change="handleChange">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+
+        </template>
+    </div>
+    <div id="content">
+        <el-button type="primary" @click="submit">发送</el-button>
+        <div class="text"></div>
+        <el-col :span="12">
+            <el-input type="textarea" :rows="15" v-model="content" placeholder="请输入内容" resize="none" wirteonly>
+            </el-input>
+        </el-col>
+    </div>
+</body>
+<script src="/js/business/AppNotice.js"></script>
