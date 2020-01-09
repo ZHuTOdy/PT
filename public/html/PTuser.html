@@ -1,0 +1,140 @@
+<style>
+  /* 设置Dialog弹出位置 */
+	.el-dialog{
+		position: absolute;
+		top: 25%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+  }
+  
+</style>
+<div id="userVue">
+  <el-row >
+    <el-col  :span="3">
+    <el-button type="primary" @click="dialogVisible = true" >新增用户</el-button>
+    </el-col>
+    <el-col :span="4" >
+        <el-input v-model="searchByNum" size="medium"><template
+          slot="prepend">工号:</template></el-input>
+    </el-col>
+    <el-col :span="4">
+        <el-input v-model="searchByNickname" type="text" size="medium">
+          <template slot="prepend">姓名:</template>
+        </el-input>
+    </el-col>
+    <el-col :span="4">
+        <el-input v-model="searchByTeam" type="text" size="medium">
+          <template slot="prepend">团队分类:</template>
+        </el-input>
+    </el-col>
+    <el-col :span="2"> 
+        <el-select v-model="enabled_select" size="medium" style="margin-top: 4%" clearable>
+            <el-option v-for="item in isexistOptions" :key="item.value" :label="item.label" :value="item.value" >
+              </el-option>
+               
+        </el-select>
+    </el-col>
+    <el-col :span="2" >
+        <el-button icon="el-icon-search" type="info" round id="searchButton" plain size="medium" @click="searchTable" style="width: 80px; margin-top: 4%"></el-button>
+    </el-col>
+    <el-col :span="3" :offset="1">
+        <el-button icon="el-icon-download" type="info" size="medium" title="导入数据" style="margin: 0;margin-top: 2%" round>
+        </el-button>
+        <el-button icon="el-icon-upload2" type="info" size="medium" title="导出数据" style="margin: 0;margin-top: 2%" round>
+        </el-button>
+    </el-col>
+    
+  </el-row>
+
+  <el-table :data="ptUserTable.items" border stripe height="550" size="medium">
+    <el-table-column prop="username" label="工号" sortable></el-table-column>
+    <el-table-column prop="nickname" label="姓名"></el-table-column>
+    <el-table-column prop="sex" label="性别" width="50px"></el-table-column>
+    <el-table-column prop="enabled" label="状态" width="60px"></el-table-column>
+    <el-table-column prop="entryDate" label="入职时间" sortable width="105px"></el-table-column>
+    <el-table-column prop="leaveDate" label="离职时间" sortable width="105px"></el-table-column>
+    <el-table-column prop="team" label="团队分类"></el-table-column>
+    <el-table-column prop="workDate" label="上岗日期"></el-table-column>
+    <el-table-column label="负责项目" width="90px">
+      <template slot-scope="scope" >
+        <el-button size="mini" @click="information(scope.$index,scope.row)" title="查看">{{Object.keys(scope.row.role ||{}).length}} <i class="el-icon-more"></i>
+        </el-button>
+      </template></el-table-column>
+    <el-table-column prop="qq" label="qq号"></el-table-column>
+    <el-table-column prop="email" label="邮箱地址" width="105px"></el-table-column>
+    <el-table-column prop="phone" label="手机号码"></el-table-column>
+    <el-table-column prop="IDCard" label="身份证" width="105px"></el-table-column>
+    <el-table-column prop="bank_name" label="银行所属姓名" width="105px"></el-table-column>
+    <el-table-column prop="bank_id" label="银行卡账号" width="105px"></el-table-column>
+    <el-table-column prop="bank_blanch" label="银行名称" width="105px"></el-table-column>
+    <el-table-column prop="bank_province" label="银行所在地" width="105px"></el-table-column>
+    <el-table-column prop="update_at" label="更新时间" sortable width="105px"></el-table-column>
+    <el-table-column label="操作" fixed ="right">
+      <template slot-scope="scope">
+        <el-row>
+        <el-col>
+        <el-button size="mini" type="primary" plain><i class="el-icon-edit">修改</i></el-button>
+        </el-col>
+        <el-col>
+        <el-button size="mini" @click="deleteUser(scope.$index,scope.row)" type="danger" plain><i class="el-icon-delete">删除</i></el-button>
+      </el-col>
+      </el-row>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="ptUserTable.page"
+    :page-sizes="[10, 20, 50, 200]" :page-size="ptUserTable.pageSize" layout="total, sizes, prev, pager, next, jumper"
+    :total="ptUserTable.total">
+  </el-pagination>
+
+
+
+  <el-dialog title="新增用户" :visible.sync="dialogVisible" :model="aUser">
+    <div>
+      <el-row>
+        <el-col :span="12">
+          <el-input v-model="aUser.username"><template slot="prepend">工号:</template></el-input>
+        </el-col>
+        <el-col :span="12">
+          <el-input v-model="aUser.nickname"><template slot="prepend">姓名:</template></el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-input v-model="aUser.sex"><template slot="prepend">性别:</template></el-input>
+        </el-col>
+        <el-col :span="12">
+          <el-input v-model="aUser.phone"><template slot="prepend">手机号:</template></el-input>
+        </el-col>
+      </el-row>
+    </div>
+    <span slot="footer" class="dialog-footer">
+      <el-button @click="dialogVisible = false">取消</el-button>
+      <el-button @click="addUser">确定</el-button>
+    </span>
+  </el-dialog>
+
+
+  <el-dialog  title="负责项目"  :visible.sync="InformationDialogVisible" :model=InformationDialogData>
+    <div>
+        <el-table size="mini" :data="InformationDialogData.data" border stripe height="250">
+            <el-table-column prop="proj" label="项目" ></el-table-column>
+            <el-table-column prop="roles" label="权限" sortable></el-table-column>
+            <el-table-column label="行" > 
+              <template slot-scope="scope" >
+              <span>{{scope.$index +1 }} </span>
+              </template></el-table-column>
+            </el-table>
+
+    </div>
+  </el-dialog>
+
+
+</div>
+<!-- custom-class="modifyDialogClass" -->
+
+
+
+
+<!-- <script type="module" src="../js/business/PTmodule.js"></script> -->
+<script  src="../js/business/PTuser.js"></script>

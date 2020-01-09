@@ -64,7 +64,8 @@
         });
       },
       handleAdd: function() {
-        channelTable.$data.aChannel.updateUser = "朱镕杰";
+        console.log("login.$data.formInline.nickname:", login.$data.formInline.nickname);
+        channelTable.$data.aChannel.updateUser = login.$data.formInline.nickname;
         return socket.emit("takeJob.addChannel", channelTable.$data.aChannel, function(res) {
           channelTable.$data.dialogVisible = false;
           return init_list();

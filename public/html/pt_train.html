@@ -1,0 +1,107 @@
+<style>
+    span {
+        vertical-align: text-bottom;
+        line-height: 30px;
+    }
+    
+    
+</style>
+<div id="PT_Train">
+    <div>
+        <el-row :gutter="2">
+            <el-col :span="0.5">
+                <span>项目:</span>
+            </el-col>
+            <el-col :span="2">
+                <el-select v-model="Project_select" size="small" clearable>
+                    <el-option v-for="item in Project_options" :key="item.value" :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-col>
+
+            <el-col :span="0.5">
+                <span>状态:</span>
+            </el-col>
+            <el-col :span="2">
+                <el-select v-model="isexist_select" size="small" clearable>
+                    <el-option v-for="item in isexistOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+                </el-select>
+
+            </el-col>
+            <el-col :span="1.5">
+                <span>是否上岗:</span>
+            </el-col>
+            <el-col :span="2">
+
+                <el-select v-model="isLine_select" size="small" clearable>
+                    <el-option v-for="item in isLineOptions" :key="item.value" :label="item.label" :value="item.value">
+                    </el-option>
+
+                </el-select>
+            </el-col>
+
+            <el-col :span="1.5">
+                <span>日期范围:</span>
+            </el-col>
+            <el-col :span="4.5">
+                <el-date-picker v-model="dateFrom" type="daterange" style="width: 230px;" range-separator="至"
+                    start-placeholder="开始日期" end-placeholder="结束日期" size="small"></el-date-picker>
+            </el-col>
+
+            <el-col :span="0.5">
+                <span>工号:</span>
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="searchByNum" size="small"></el-input>
+            </el-col>
+            <el-col :span="0.5">
+                <span>姓名:</span>
+            </el-col>
+            <el-col :span="2">
+                <el-input v-model="searchByNickname" type="text" size="small"></el-input>
+            </el-col>
+            
+            <!-- 20.5col -->
+            <el-col :span="2">
+
+                <el-button icon="el-icon-download" type="primary" size="small" title="导入数据" style="margin: 0" circle>
+                </el-button>
+                <el-button icon="el-icon-upload2" type="primary" size="small" title="导出数据" style="margin: 0" circle>
+                </el-button>
+            </el-col>
+            <el-col :span="1">
+                <el-button icon="el-icon-search" round size="small" @click="getTableDate" style="width: 50px"></el-button>
+            </el-col>
+        </el-row>
+        <br />
+        <!-- width="80px" -->
+        <el-table :data="tabel.items" border >
+            <el-table-column prop="username" label="工号" sortable ></el-table-column>
+            <el-table-column prop="nickname" label="姓名"></el-table-column>
+            <el-table-column prop="sex" label="性别"></el-table-column>
+            <el-table-column prop="phone" label="手机号" width="120px"></el-table-column>
+            <el-table-column prop="enabled" label="状态"></el-table-column>
+            <el-table-column prop="entryDate" label="入职日期" sortable width="105px"></el-table-column>
+            <el-table-column prop="leaveDate" label="离职日期" sortable width="105px"></el-table-column>
+            <el-table-column prop="project" label="项目"></el-table-column>
+            <el-table-column prop="isReUsed" label="是否复用"></el-table-column>
+            <el-table-column prop="isonLine" label="是否上岗"></el-table-column>
+            <el-table-column prop="workDate" label="上岗时间" sortable width="110px"></el-table-column>
+            <el-table-column prop="trianDays" label="培训天数" sortable width="110px"></el-table-column>
+            <el-table-column prop="practiceTotal" label="练习产量" sortable width="110px"></el-table-column>
+            <el-table-column prop="practice_accuracy" label="练习准确率" sortable width="130px"> </el-table-column>
+            <el-table-column prop="examScore" label="考核分数" sortable width="110px"></el-table-column>
+            <el-table-column prop="practiceCharacter" label="累计练习字符" sortable width="130px"></el-table-column>
+            <el-table-column prop="remarks" label="备注"></el-table-column>
+
+        </el-table>
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="tabel.page"
+            :page-sizes="[10, 20, 50, 100]" :page-size="tabel.pageSize" layout="total, sizes, prev, pager, next, jumper"
+            :total="tabel.total">
+        </el-pagination>
+    </div> 
+</div>
+
+<script type="text/javascript" src="../js/business/pt_train.js">  </script>

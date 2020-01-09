@@ -1,0 +1,88 @@
+<style>
+    .headDiv {
+        border: solid;
+        border-width: 7px;
+        height: 200px;
+        border-color: rgb(168, 165, 164);
+        text-align: center;
+    }
+
+    .secondHeadDiv {
+        border-bottom: solid;
+        border-color: rgb(119, 117, 117);
+        background-color:rgb(168, 165, 164);
+        height: 13%;
+    }
+
+    .mainDiv {
+        text-align: center;
+        margin: 25%;
+        margin-top: 18%;
+        
+    }
+</style>
+
+<div id="homePage" style="height: 100%">
+    <el-row style="text-align: left;">
+        <span>员工数据</span>
+    </el-row>
+    <hr />
+    <br>
+    <el-row :gutter="40">
+        <el-col :span="8">
+            <div class="headDiv">
+                <div class="secondHeadDiv">截至目前在岗人数</div>
+                <div class="mainDiv">
+                    <span style="height: 90px">394</span>
+                </div>
+
+
+            </div>
+        </el-col>
+        <el-col :span="8">
+            <div class="headDiv">
+                <div class="secondHeadDiv">本月上线情况</div>
+                <div class="mainDiv">
+                    <span>已上线人数</span><span style="color: green">&nbsp; &nbsp; &nbsp; 38</span><br>
+                    <span>未上线人数</span><span style="color: red">&nbsp; &nbsp; &nbsp; 5</span>
+                </div>
+            </div>
+        </el-col>
+        <el-col :span="8">
+            <div class="headDiv">
+                <div class="secondHeadDiv">本月上岗/离职情况</div>
+                <div class="mainDiv">
+
+                    <span>上岗人数</span><span style="color: red">&nbsp; &nbsp; &nbsp; 94</span><br>
+                    <span>离职人数</span><span style="color: red">&nbsp; &nbsp; &nbsp; 66</span>
+                </div>
+            </div>
+        </el-col>
+    </el-row>
+    <br>
+    <div style="text-align: left">
+        <h4 style="display: inline">每日分析</h4><span>(截止昨天)</span>
+    </div>
+    <hr />
+
+    <div style="text-align: center" style="vertical-align: middle">
+        <span>上线人数</span>
+
+    </div>
+    <br>
+    <el-row>
+        <el-col :span="20" :offset="1">
+    <div style="height:400px;margin: 0;" id="numChart">
+        </el-row>
+    </div>
+
+
+
+
+
+</div>
+
+
+<script src="../js/business/homePage.js"></script>
+<script src="../js/business/myChart.js"></script>
+

@@ -175,26 +175,39 @@
         return init_list();
       },
       delete_plan: (index, data) => {
-        var query;
-        query = {
-          permission: data.permission,
-          date: data.date,
-          projectID: data.projectID
-        };
-        return socket.emit("takeJob.delete_plan", query, function(res) {
+        var _id;
+        _id = data._id;
+        return socket.emit("takeJob.delete_plan", _id, function(res) {
           return init_list();
         });
       },
       add_plan: function() {
+        console.log("计划时间：", planTable.$data.aPlan.date);
         return socket.emit("takeJob.add_plan", planTable.$data.aPlan, function(res) {
           planTable.$data.dialogVisible = false;
           return init_list();
         });
       },
-      update_plan: function(allNumber, remarks) {
-        console.log("allNumber::", allNumber);
-        console.log("remarks::", remarks);
-        return init_list();
+      update_plan: function() {
+        var AllNumber, _id, remarks;
+        _id = planTable.$data.uPlan._id;
+        AllNumber = planTable.$data.uPlan.AllNumber;
+        remarks = planTable.$data.uPlan.remarks;
+        return socket.emit("takeJob.edit_plan", _id, {
+          "$set": {
+            "AllNumber": AllNumber,
+            "remarks": remarks
+          }
+        }, function(res) {
+          planTable.$data.dialogVisible_2 = false;
+          return init_list();
+        });
+      },
+      handleEditCopy: function(index, data) {
+        planTable.$data.uPlan._id = data._id;
+        planTable.$data.uPlan.AllNumber = data.AllNumber;
+        planTable.$data.uPlan.remarks = data.remarks;
+        return planTable.$data.dialogVisible_2 = true;
       }
     }
   });
@@ -206,10 +219,12 @@
     permission = planTable.$data.permission;
     year = planTable.$data.year;
     month = planTable.$data.month;
-    date = year + month;
+    date = year + "-" + month;
     return socket.emit("takeJob.list", {
       "permission": permission,
-      "date": date
+      "date": {
+        $regex: date
+      }
     }, page, pageSize, function(res) {
       if (res.err) {
         return alert(res.err);
