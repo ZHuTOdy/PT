@@ -88,7 +88,7 @@ login = (req, res)->
     if err || not user || user == undefined
       result.err = '登录失败，用户不存在';
       return req.respond result
-    else
+    else  
       if !user.enabled #离职状态
         result.err = '对不起,此用户已经离职,已经不能登录';
         return req.respond(result)
@@ -112,6 +112,9 @@ login = (req, res)->
       else
         result.err = '密码错误，请重新输入';
         return req.respond(result)
+       result.success = true
+       return req.respond(result)
+
 
 
 resetpwd = (req) ->
@@ -170,7 +173,23 @@ get_code = (req)->
       result.error = "没有钉钉账号"
       return req.respond result
 
+      if checkPwd req.data[0].password
+        result.error  = checkPwd req.data[0].password
+        set_user_illegal(username)
+        return req.respond(result)
 
+      # if user.illegal
+      #   result.error = "账号已被禁止"
+      #   return req.respond(result)
+
+      if !/192\.168\./.test( req.socket.handshake.headers.host )
+        if not PIN
+          result.error = '验证码不能为空，请点击获取验证码后，登录钉钉查看验证码'
+          return req.respond(result)
+        if PIN != user_PIN?[username]?.PIN
+          result.error = '验证码错误'
+          set_user_illegal(username)
+          return req.respond(result)
 
 
 # 修改密码

@@ -1,5 +1,5 @@
 (function() {
-  var app, express, express_static, io_options, mongo, mongo_url, path, public_dir, server;
+  var app, express, express_static, io_options, moment, mongo, mongo_url, mongo_url_sys_user, path, public_dir, server;
 
   require('./log');
 
@@ -9,9 +9,25 @@
 
   global.ObjectId = require('mongodb').ObjectId;
 
-  global.moment = require('moment');
+  global.ejs = require("ejs");
+
+  // fs = require 'fs' 
+  // async = require 'async'
+  global.moment = moment = require('moment');
 
   
+  // try
+
+  //   init_db = require "./mongo_connect/mongo_cmd"
+  // catch error
+  //   debug or console.log "uncaughtException #{error.stack or error}"
+
+  // init_mastet = ()->
+  //   init_db (err, db_cmd) ->
+  //     return setTimeout init_mastet,3000 if err 
+  //     global.db_cmd = db_cmd   
+  // init_mastet();
+
   //socket.io選項
   io_options = {
     'flash policy port': -1,
@@ -30,7 +46,10 @@
 
   app = express();
 
-  server = require('http').Server(app, io_options).listen(8088); //端口
+  //端口
+  server = require('http').Server(app, io_options).listen(2222, function() {
+    return console.log("listening on *:2222");
+  });
 
   global.pt_io = require("./router")(server);
 
@@ -38,17 +57,27 @@
 
   
   //创建数据库的连接
-  mongo_url = "mongodb://test:test@127.0.0.1:27017/test_user?authSource=admin";
+  mongo_url = "mongodb://test:test@192.168.202.2:27017/test_user?authSource=admin";
+
+  mongo_url_sys_user = "mongodb://test:test@192.168.202.2:27017/sys_user?authSource=admin";
 
   global.user_db = mongo.db(mongo_url, {
-    useNewUrlParser: true
+    native_parser: true
+  });
+
+  global.user_db_sys_user = mongo.db(mongo_url_sys_user, {
+    native_parser: true
   });
 
   global.user_db.bind("users"); //使用collections   users
 
+  global.user_db_sys_user.bind("users"); //使用collections   users
+
   global.user_db.bind("takeJobPlan"); //使用collections   takeJobPlan
 
   global.user_db.bind("takeJobChannel");
+
+  global.user_db.bind("resume");
 
   // global.user_db.bind "test" #使用collections  test
 
@@ -64,10 +93,10 @@
       }
       docs.push(doc);
       return process.nextTick(function() {
-        return cursor.next(on_doc);
+        return cursor.nextObject(on_doc);
       });
     };
-    return cursor.next(on_doc);
+    return cursor.nextObject(on_doc);
   };
 
   global.succeeRes = function(items, page, pageSize, total) {

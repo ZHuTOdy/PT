@@ -1,0 +1,420 @@
+<meta charset="utf-8" />
+<style>
+  /*td{
+border: #ccc 1px solid;
+margin: -1px -1px -1px -1px;
+}*/
+  .row {
+    max-width: 90%;
+  }
+
+  /*td th{
+  width: 60px !important;
+}*/
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="css/select.dataTables.min.css"/> -->
+<!-- <link rel="stylesheet" type="text/css" href="css/buttons.dataTables.min.css"/> -->
+<title>产量统计</title>
+<div class="row">
+
+</div>
+
+<div class="row">
+  <div class="small-5 columns">
+    <h4>
+      <kbd><a href="###" class="back" title="返回"><span class="fontawesome-chevron-left"></span></a></kbd>
+      产量统计
+    </h4>
+  </div>
+  <!-- right info -->
+  <div class="small-2 columns text-right right">
+    <div class="info">
+      <kbd>
+        <span title="用户名" class="entypo-vcard"></span>
+        <span data-bind="text: window.user.nickname ,style: { color: 'blue' }"></span>
+        <span title="工号" class="entypo-user"></span>
+        <span data-bind="text: window.user.username ,style: { color: 'blue' }"></span>
+      </kbd>
+    </div>
+  </div>
+
+
+</div>
+
+
+<div id="query_bar" class="row collapse">
+  <div class="small-3 columns ">
+    <div class="row collapse">
+      <div class="small-4 columns">
+        <span class="radius prefix">项目</span>
+      </div>
+      <div class="small-8 columns end">
+        <select id="pro_name" func="get_pro_sum()">
+          <!-- onchange="change()" -->
+        </select>
+      </div>
+    </div>
+  </div>
+  <span class="small-2 large-2 columns"><span class="prefix radius">时间范围：</span></span>
+  <span class="small-2 large-2 columns">
+    <span class="prefix">
+      <a href="###" title="开始日期" class="from date" data-date-language="cn">
+        从 <span class="text fontawesome-calendar"></span>
+      </a>
+    </span>
+  </span>
+  <span class="small-2 large-2 columns end">
+    <span class="postfix">
+      <a href="###" title="结束日期" class="to date" data-date-language="cn">
+        到 <span class="text fontawesome-calendar"></span>
+      </a>
+    </span>
+  </span>
+  <span class="small-2 large-2 columns end">
+    <a href="###" class="clear" title="点击清空当日产量统计">
+      <span class="postfix inline radius">清空</span></a>
+  </span>
+  <span class="small-1 large-1 columns end">
+    <a class="download_mid" title="点击下载中午产量统计">
+      <span class="postfix inline radius">导出</span></a>
+    <a id="jstoxls"></a>
+  </span>
+  <!--   <span class="small-1 large-1 columns">
+           <span class="radius prefix">工号</span>
+    </span>
+  <span class="small-2 large-2 columns">
+      <input id="code" type="text"/>
+  </span>
+  <span class="small-1 large-1 columns end">
+    <a id="search_button" href="###" title="点击开始查找"><span class="search_button fontawesome-search postfix inline radius"></span>
+    </a>
+  </span> -->
+  <!--   <span class="small-2 large-2 columns" data-bind="style: {display: '1061,1197,1439,4808'.indexOf(window.user.username) != -1  ? '' : 'none'}">
+    <ul class="version button-group radius left">
+    <li><a href="#" data-bind="attr: { 'id': 'Tg'} ,css: {success: Tg, secondary: !Tg , 'secondary tiny button': true }" value="Tg">T哥版</a></li>
+    <li><a href="#" data-bind="attr: { 'id': 'yr'} ,css: {success: yr, secondary: !yr, 'secondary tiny button': true }" value="yr">远榕版</a></li>
+    </ul>
+  </span> -->
+</div>
+<!--
+<table style="width:100%" class="outputs selectable"   data-bind="style: {display: Tg() ? '' : 'none'}">
+    <thead>
+    <tr>
+      <th style="text-align:center;">日期</th>
+      <th style="text-align:center;">工号</th>
+      <th style="text-align:center;">姓名</th>
+      <th style="text-align:center;">工序</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+    </tr>
+  </thead>
+  <tbody data-bind="foreach: outputs">
+    <tr style="text-align:center">
+      <td rowspan="3" class="submit_day"><span data-bind="text:submit_day"></span></td>
+      <td rowspan="3" class="code"><span data-bind="text:code"></span></td>
+      <td rowspan="3" class="nickname"><span data-bind="text:nickname"></span></td>
+      <td>汇总</td>
+      <td class="all.character"><span data-bind="text:all.character"></span></td>
+      <td class="all.accuracy"><span data-bind="text:all.accuracy"></span></td>
+      <td class="all.speed"><span data-bind="text:all.speed"></span></td>
+      <td class="all.field_speed"><span data-bind="text:all.field_speed"></span></td>
+    </tr>
+      <tr style="text-align:center">
+          <td>一码</td>
+          <td class="op1.character"><span data-bind="text:op1.character"></span></td>
+          <td class="op1.accuracy"><span data-bind="text:op1.accuracy"></span></td>
+          <td class="op1.speed"><span data-bind="text:op1.speed"></span></td>
+        <td class="op1.field_speed"><span data-bind="text:op1.field_speed"></span></td>
+      </tr>
+      <tr style="text-align:center">
+          <td>二码</td>
+          <td class="op2.character"><span data-bind="text:op2.character"></span></td>
+          <td class="op2.accuracy"><span data-bind="text:op2.accuracy"></span></td>
+          <td class="op2.speed"><span data-bind="text:op2.speed"></span></td>
+        <td class="op2.field_speed"><span data-bind="text:op2.field_speed"></span></td>
+      </tr>
+  </tbody>
+</table> -->
+
+
+<table id="sum_table" class="display selectable" cellspacing="1" width="100%">
+  <thead>
+    <tr style="text-align:center">
+      <!-- <th colspan="3"></th> -->
+      <th rowspan="2">日期</th>
+      <th rowspan="2" style="text-align:center;">工号</th>
+      <th rowspan="2" style="text-align:center;">姓名</th>
+      <th colspan="11" style="text-align:center;">汇总</th>
+      <th colspan="11" style="text-align:center;">初审</th>
+      <th colspan="26" style="text-align:center;">一码</th>
+      <th colspan="26" style="text-align:center;">二码</th>
+      <th colspan="26" style="text-align:center;">问题件</th>
+      <th colspan="11" style="text-align:center;">复核</th>
+    </tr>
+    <tr style="text-align:center">
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">报销单字符总量</th>
+      <th style="text-align:center;">报销单有效字符</th>
+      <th style="text-align:center;">报销单分块效率</th>
+      <th style="text-align:center;">报销单字符效率</th>
+      <th style="text-align:center;">报销单录入质量</th>
+      <th style="text-align:center;">发票字符总量</th>
+      <th style="text-align:center;">发票有效字符</th>
+      <th style="text-align:center;">发票分块效率</th>
+      <th style="text-align:center;">发票字符效率</th>
+      <th style="text-align:center;">发票录入质量</th>
+      <th style="text-align:center;">诊断字符总量</th>
+      <th style="text-align:center;">诊断有效字符</th>
+      <th style="text-align:center;">诊断分块效率</th>
+      <th style="text-align:center;">诊断字符效率</th>
+      <th style="text-align:center;">诊断录入质量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">报销单字符总量</th>
+      <th style="text-align:center;">报销单有效字符</th>
+      <th style="text-align:center;">报销单分块效率</th>
+      <th style="text-align:center;">报销单字符效率</th>
+      <th style="text-align:center;">报销单录入质量</th>
+      <th style="text-align:center;">发票字符总量</th>
+      <th style="text-align:center;">发票有效字符</th>
+      <th style="text-align:center;">发票分块效率</th>
+      <th style="text-align:center;">发票字符效率</th>
+      <th style="text-align:center;">发票录入质量</th>
+      <th style="text-align:center;">诊断字符总量</th>
+      <th style="text-align:center;">诊断有效字符</th>
+      <th style="text-align:center;">诊断分块效率</th>
+      <th style="text-align:center;">诊断字符效率</th>
+      <th style="text-align:center;">诊断录入质量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">报销单字符总量</th>
+      <th style="text-align:center;">报销单有效字符</th>
+      <th style="text-align:center;">报销单分块效率</th>
+      <th style="text-align:center;">报销单字符效率</th>
+      <th style="text-align:center;">报销单录入质量</th>
+      <th style="text-align:center;">发票字符总量</th>
+      <th style="text-align:center;">发票有效字符</th>
+      <th style="text-align:center;">发票分块效率</th>
+      <th style="text-align:center;">发票字符效率</th>
+      <th style="text-align:center;">发票录入质量</th>
+      <th style="text-align:center;">诊断字符总量</th>
+      <th style="text-align:center;">诊断有效字符</th>
+      <th style="text-align:center;">诊断分块效率</th>
+      <th style="text-align:center;">诊断字符效率</th>
+      <th style="text-align:center;">诊断录入质量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+      <th style="text-align:center;">字符总量</th>
+      <th style="text-align:center;">有效字符总量</th>
+      <th style="text-align:center;">准确率</th>
+      <th style="text-align:center;">时间</th>
+      <th style="text-align:center;">分块数量</th>
+      <th style="text-align:center;">分块效率</th>
+      <th style="text-align:center;">字符效率</th>
+      <th style="text-align:center;">正确字段数量</th>
+      <th style="text-align:center;">总字段数量</th>
+      <th style="text-align:center;">录入?数量</th>
+      <th style="text-align:center;">录入?比例</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th colspan="3" style="text-align:center">统计</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tfoot>
+  <!-- <tbody data-bind="foreach: outputs"> -->
+  <!--     <tr style="text-align:center">
+      <td class="submit_day"><span data-bind="text:submit_day"></span></td>
+      <td class="code"><span data-bind="text:code"></span></td>
+      <td class="nickname"><span data-bind="text:nickname"></span></td>
+      <td class="all.character"><span data-bind="text:all.character"></span></td>
+      <td class="all.accuracy"><span data-bind="text:all.accuracy"></span></td>
+      <td class="all.time"><span data-bind="text:all.time"></span></td>
+      <td class="all.block"><span data-bind="text:all.block"></span></td>
+      <td class="all.speed"><span data-bind="text:all.speed"></span></td>
+      <td class="all.field_speed"><span data-bind="text:all.field_speed"></span></td>
+      <td class="op1.character"><span data-bind="text:op1.character"></span></td>
+      <td class="op1.accuracy"><span data-bind="text:op1.accuracy"></span></td>
+      <td class="op1.time"><span data-bind="text:op1.time"></span></td>
+      <td class="op1.block"><span data-bind="text:op1.block"></span></td>
+      <td class="op1.speed"><span data-bind="text:op1.speed"></span></td>
+      <td class="op1.field_speed"><span data-bind="text:op1.field_speed"></span></td>
+      <td class="op2.character"><span data-bind="text:op2.character"></span></td>
+      <td class="op2.accuracy"><span data-bind="text:op2.accuracy"></span></td>
+      <td class="op2.time"><span data-bind="text:op2.time"></span></td>
+      <td class="op2.block"><span data-bind="text:op2.block"></span></td>
+      <td class="op2.speed"><span data-bind="text:op2.speed"></span></td>
+      <td class="op2.field_speed"><span data-bind="text:op2.field_speed"></span></td>
+    </tr>  -->
+  <!-- </tbody> -->
+</table>
+
+
+
+<!-- <script type="text/javascript" src="js/dataTables.editor.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/dataTables.select.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="js/buttons.flash.min.js"></script> -->
+<!-- <script type="text/javascript" src="js/buttons.print.min.js"></script> -->
+<script src="sum.js"></script>

@@ -1,5 +1,6 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="zh">
+
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/vendor/element.css">
@@ -10,16 +11,16 @@
   <div id="mainframe" style="height: 100%"></div>
 </body>
 
-<script src="js/vendor/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/vendor/echarts.min.js"></script>
+<script src="js/vendor/jquery-3.4.1.min.js"></script>
 <script src="js/vendor/vue.min.js"></script>
 <script src="js/vendor/element.js"></script>
 <script src="socket.io/socket.io.js"></script>
 <script src="js/business/conf.js"></script>
 <script>
-socket = io();
-$('#mainframe').load('html/login.html');
-
-
+  var socket = io();
+  $('#mainframe').load('html/loginTest.html');
+  // $('#mainframe').load('html/loginTest.html');
 </script>
 
 </html>
