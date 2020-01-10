@@ -109,7 +109,7 @@
               }
               global.glo_projects = items; //全部PT所能使用的项目配置
               res.cookie("username", username, {
-                maxAge: 60 * 1000 * 60,
+                maxAge: 60 * 1000 * 60 * 24,
                 signed: true
               });
               data = {};

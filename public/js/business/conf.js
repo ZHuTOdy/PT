@@ -31,7 +31,7 @@ window.menuList = [{
       {
         title: "培训上岗率",
         type: "2-2",
-        link: "/html/AAA.html"
+        link: "/html/trainingRate.html"
       }
     ]
   },

@@ -70,7 +70,7 @@ router.post("/login", (req,res)->
           toArray user_db_sys_user.users.find({"username":/^P/, "enabled":true},{"username":1,"nickname":1}), (err,pt)-> #找出所有在职的PT
             console.log "err:",err if err
             global.glo_projects = items #全部PT所能使用的项目配置
-            res.cookie("username", username, {maxAge:60*1000*60, signed:true})
+            res.cookie("username", username, {maxAge:60*1000*60*24, signed:true})
             data = {}
             data.username = user.username
             data.nickname = user.nickname

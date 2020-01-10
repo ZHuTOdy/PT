@@ -55,11 +55,6 @@ var content = new Vue({
                 return alert("项目、权限和内容三者之一不能为空！");
             }
             socket.emit("notice.send", project.$data.value, permission.$data.value, this.$data.content, nickname, function (res) {
-                socket = io.connect("http://192.168.202.3:6200");
-                socket.emit("notice.test", this.$data.content, function (res) {
-                    content.$data.loading = false;
-                    return content.notice();
-                })
                 if (res.err) {
                     content.$data.loading = false;
                     return alert(res.err);
