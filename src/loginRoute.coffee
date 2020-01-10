@@ -60,7 +60,7 @@ router.post("/login", (req,res)->
     # console.log "founduser:",user
     if err || not user || user == undefined
       result.err = '登录失败，用户不存在';
-      return req.respond result
+      return res.send(result)
     else
       if !user.enabled #离职状态
         result.err = '对不起,此用户已经离职,已经不能登录';

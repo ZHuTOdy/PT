@@ -1,5 +1,5 @@
 (function() {
-  var app, express, express_static, io_options, moment, mongo, mongo_url, mongo_url_sys_user, path, public_dir, server;
+  var app, bodyParser, express, express_static, io_options, loginRoute, moment, mongo, mongo_url, mongo_url_sys_user, path, public_dir, server;
 
   require('./log');
 
@@ -15,20 +15,12 @@
   // async = require 'async'
   global.moment = moment = require('moment');
 
-  
-  // try
+  global.cookieParser = require("cookie-parser");
 
-  //   init_db = require "./mongo_connect/mongo_cmd"
-  // catch error
-  //   debug or console.log "uncaughtException #{error.stack or error}"
+  loginRoute = require("./loginRoute");
 
-  // init_mastet = ()->
-  //   init_db (err, db_cmd) ->
-  //     return setTimeout init_mastet,3000 if err 
-  //     global.db_cmd = db_cmd   
-  // init_mastet();
+  bodyParser = require("body-parser");
 
-  //socket.io選項
   io_options = {
     'flash policy port': -1,
     'origins': '*:*'
@@ -48,18 +40,26 @@
 
   //端口
   server = require('http').Server(app, io_options).listen(2222, function() {
-    return console.log("listening on *:2222");
+    return console.log("listening on *:1122");
   });
 
   global.pt_io = require("./router")(server);
 
   app.use("/", express_static(public_dir)); //浏览器静态页面路径
 
-  
-  //创建数据库的连接
-  mongo_url = "mongodb://test:test@192.168.202.2:27017/test_user?authSource=admin";
+  app.use(cookieParser("20"));
 
-  mongo_url_sys_user = "mongodb://test:test@192.168.202.2:27017/sys_user?authSource=admin";
+  app.use(bodyParser.urlencoded({
+    extended: false
+  }));
+
+  app.use(bodyParser.json());
+
+  app.use(loginRoute);
+
+  mongo_url = "mongodb://test:test@127.0.0.1:27017/test_user?authSource=admin";
+
+  mongo_url_sys_user = "mongodb://test:test@127.0.0.1:27017/sys_user?authSource=admin";
 
   global.user_db = mongo.db(mongo_url, {
     native_parser: true
@@ -78,6 +78,10 @@
   global.user_db.bind("takeJobChannel");
 
   global.user_db.bind("resume");
+
+  global.user_db.bind("conf");
+
+  global.user_db.bind("appNotice");
 
   // global.user_db.bind "test" #使用collections  test
 
@@ -119,6 +123,10 @@
 
   require("./user");
 
+  require("./pt_trainRoute");
+
   require("./takeJob");
+
+  require("./notice");
 
 }).call(this);
