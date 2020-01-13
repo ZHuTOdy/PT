@@ -41,7 +41,7 @@ window.menuList = [{
     subMenu: [{
         title: "在岗名单",
         type: "3-1",
-        link: "/html/AAA.html"
+        link: "/html/OnTheList.html"
       },
       {
         title: "规则宣导记录",
