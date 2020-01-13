@@ -54,24 +54,29 @@ window.menuList = [{
     title: "数据统计",
     type: "4",
     subMenu: [{
-        title: "日常报表",
+        title: "日报表",
         type: "4-1",
         link: "/html/dailyReport.html"
       },
       {
-        title: "月报表",
+        title: "周报表",
         type: "4-2",
-        link: "/html/AAA.html"
+        link: "/html/weeklyReport.html"
+      },
+      {
+        title: "月报表",
+        type: "4-3",
+        link: "/html/monthlyReport.html"
       },
       {
         title: "上线情况分析",
-        type: "4-3",
-        link: "/html/AAA.html"
+        type: "4-4",
+        link: "/html/onlineSituation.html"
       },
       {
         title: "在线时间分布",
-        type: "4-4",
-        link: "/html/AAA.html"
+        type: "4-5",
+        link: "/html/onlineTime.html"
       }
     ]
   },
@@ -81,17 +86,17 @@ window.menuList = [{
     subMenu: [{
         title: "工资表",
         type: "5-1",
-        link: "/html/AAA.html"
+        link: "/html/payroll.html"
       },
       {
         title: "推荐奖",
         type: "5-2",
-        link: "/html/AAA.html"
+        link: "/html/award.html"
       },
       {
         title: "客户投诉数据",
         type: "5-3",
-        link: "/html/AAA.html"
+        link: "/html/complaint.html"
       }
     ]
   },

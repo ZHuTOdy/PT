@@ -51,22 +51,22 @@ code = new Vue({
         ]
       }]
     }]
-  },  
+  }, 
   methods: {
     handleChange: (code)->
-      dailyReport.$data.code = code
+      monthlyReport.$data.code = code
       init_list()
   }
 });
 
-date = new Vue({
-  el: "#date",
+month = new Vue({
+  el: "#month",
   data: {
-    date : ""
+    month : ""
   },
   methods: {
-    handleChange: (date)->
-      dailyReport.$data.date = date
+    handleChange: (month)->
+      monthlyReport.$data.month = month
       init_list()
     # handleChange: ()->
     #   init_list()
@@ -76,37 +76,34 @@ date = new Vue({
 
 
 
-dailyReportTable = new Vue({
-	el: "#dailyReportTable",
+monthlyReportTable = new Vue({
+	el: "#monthlyReportTable",
 	data:{
 		items: []
 		page: 0
 		pageSize: 10
 		total: 0
 		Selection: []
-		# code: code.$data.options.value
-		# fromTime : date.$data.date[0] || "2000-01-01"
-		# toTime : date.$data.date[1] || "2111-12-31"
 	},
 	methods:{
 		handleSizeChange: (pageSize)->
-			dailyReportTable.$data.pageSize = pageSize
+			monthlyReportTable.$data.pageSize = pageSize
 			init_list()
 		handleCurrentChange: (page)->
-			dailyReportTable.$data.page = page
+			monthlyReportTable.$data.page = page
 			init_list()
+		handleSelectionChange: (val)->
+			this.Selection = val
 	}
-	
 })
 
 init_list = ()->
-	page = dailyReportTable.$data.page
-	pageSize = dailyReportTable.$data.pageSize
-	code = dailyReport.$data.code
-	fromTime = date.$data.date[0] || "2000-01-01"
-	toTime = date.$data.date[1] || "2111-12-31"
-	socket.emit "report.list", {"code" : code, "date":{$gte:fromTime, $lte:toTime },"week" :{$regex:week}}, page, pageSize,  (res)->
+	page = monthlyReportTable.$data.page
+	pageSize = monthlyReportTable.$data.pageSize
+	code = monthlyReportTable.$data.code
+	month = monthlyReport.$data.month
+	socket.emit "report.list", {"code" :{$regex:code}, "month":{$regex:month} }, page, pageSize,  (res)->
 		return alert( res.err ) if res.err
-		Object.assign( dailyReportTable.$data, res ) 
+		Object.assign( monthlyReportTable.$data, res ) 
 
 init_list()

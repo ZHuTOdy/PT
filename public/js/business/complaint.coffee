@@ -1,3 +1,13 @@
+month = new Vue({
+  el: "#month",
+  data: {
+    month : ""
+  },
+  methods: {
+    #
+  }
+});
+
 code = new Vue({
   el: "#code",
   data: {
@@ -59,54 +69,47 @@ code = new Vue({
   }
 });
 
-date = new Vue({
-  el: "#date",
+name = new Vue({
+  el: "#name",
   data: {
-    date : ""
+    username: ""
+    nickname: ""
   },
   methods: {
-    handleChange: (date)->
-      dailyReport.$data.date = date
-      init_list()
-    # handleChange: ()->
-    #   init_list()
-    
+    # 
   }
 });
 
 
-
-dailyReportTable = new Vue({
-	el: "#dailyReportTable",
+complaintTable = new Vue({
+	el: "#complaintTable",
 	data:{
 		items: []
 		page: 0
 		pageSize: 10
 		total: 0
 		Selection: []
-		# code: code.$data.options.value
-		# fromTime : date.$data.date[0] || "2000-01-01"
-		# toTime : date.$data.date[1] || "2111-12-31"
 	},
 	methods:{
-		handleSizeChange: (pageSize)->
-			dailyReportTable.$data.pageSize = pageSize
-			init_list()
-		handleCurrentChange: (page)->
-			dailyReportTable.$data.page = page
-			init_list()
-	}
-	
+		# handleSizeChange: (pageSize)->
+		# 	payrollTable.$data.pageSize = pageSize
+		# 	init_list()
+		# handleCurrentChange: (page)->
+		# 	payrollTable.$data.page = page
+		# 	init_list()
+		# handleSelectionChange: (val)->
+		# 	this.Selection = val
+	}	
 })
 
 init_list = ()->
-	page = dailyReportTable.$data.page
-	pageSize = dailyReportTable.$data.pageSize
-	code = dailyReport.$data.code
-	fromTime = date.$data.date[0] || "2000-01-01"
-	toTime = date.$data.date[1] || "2111-12-31"
-	socket.emit "report.list", {"code" : code, "date":{$gte:fromTime, $lte:toTime },"week" :{$regex:week}}, page, pageSize,  (res)->
-		return alert( res.err ) if res.err
-		Object.assign( dailyReportTable.$data, res ) 
+	page = payrollTable.$data.page
+	pageSize = payrollTable.$data.pageSize
+	month = monthlyReport.$data.month
+	username = name.$data.username
+	nickname = name.$data.nickname
+	# socket.emit "report.list", {"month":{$regex:month},"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
+	# 	return alert( res.err ) if res.err
+	# 	Object.assign( payrollTable.$data, res ) 
 
 init_list()

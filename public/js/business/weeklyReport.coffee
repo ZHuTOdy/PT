@@ -51,22 +51,22 @@ code = new Vue({
         ]
       }]
     }]
-  },  
+  }, 
   methods: {
     handleChange: (code)->
-      dailyReport.$data.code = code
+      weeklyReport.$data.code = code
       init_list()
   }
 });
 
-date = new Vue({
-  el: "#date",
+week = new Vue({
+  el: "#week",
   data: {
-    date : ""
+    week : ""
   },
   methods: {
-    handleChange: (date)->
-      dailyReport.$data.date = date
+    handleChange: (week)->
+      weeklyReport.$data.week = week
       init_list()
     # handleChange: ()->
     #   init_list()
@@ -76,37 +76,36 @@ date = new Vue({
 
 
 
-dailyReportTable = new Vue({
-	el: "#dailyReportTable",
+weeklyReportTable = new Vue({
+	el: "#weeklyReportTable",
 	data:{
 		items: []
 		page: 0
 		pageSize: 10
 		total: 0
 		Selection: []
-		# code: code.$data.options.value
-		# fromTime : date.$data.date[0] || "2000-01-01"
-		# toTime : date.$data.date[1] || "2111-12-31"
+		code: code.$data.value
 	},
 	methods:{
 		handleSizeChange: (pageSize)->
-			dailyReportTable.$data.pageSize = pageSize
+			weeklyReportTable.$data.pageSize = pageSize
 			init_list()
 		handleCurrentChange: (page)->
-			dailyReportTable.$data.page = page
+			weeklyReportTable.$data.page = page
 			init_list()
+		handleSelectionChange: (val)->
+			this.Selection = val
 	}
 	
 })
 
 init_list = ()->
-	page = dailyReportTable.$data.page
-	pageSize = dailyReportTable.$data.pageSize
-	code = dailyReport.$data.code
-	fromTime = date.$data.date[0] || "2000-01-01"
-	toTime = date.$data.date[1] || "2111-12-31"
-	socket.emit "report.list", {"code" : code, "date":{$gte:fromTime, $lte:toTime },"week" :{$regex:week}}, page, pageSize,  (res)->
+	page = weeklyReportTable.$data.page
+	pageSize = weeklyReportTable.$data.pageSize
+	code = weeklyReport.$data.code
+	week = week.$data.week
+	socket.emit "report.list", {"code" :{$regex:code}, "week" :{$regex:week}}, page, pageSize,  (res)->
 		return alert( res.err ) if res.err
-		Object.assign( dailyReportTable.$data, res ) 
+		Object.assign( weeklyReportTable.$data, res ) 
 
 init_list()
