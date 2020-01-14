@@ -46,7 +46,7 @@ window.menuList = [{
       {
         title: "规则宣导记录",
         type: "3-2",
-        link: "/html/AAA.html"
+        link: "/html/rule.html"
       }
     ]
   },

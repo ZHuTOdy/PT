@@ -45,7 +45,7 @@
     <div id="project" class="sel">
         <span style="float: left; line-height: 40px;">项目：</span>
         <template>
-            <el-select v-model="value" placeholder="请选择" @change="changeProject" multiple collapse-tags style="width: 100px;">
+            <el-select v-model="value" placeholder="请选择" @change="changeProject" style="width: 100px;">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
             </el-select>
@@ -90,7 +90,7 @@
     <div id="ListTable">
         <div class="text"></div>
         <template>
-            <el-table :data="items" style="width: 100%;" :default-sort="{prop: 'projectID', order: 'descending'}" stripe
+            <el-table :data="items" style="width: 100%;" :default-sort="{prop: 'ID', order: 'descending'}" stripe
                 border @selection-change="handleSelectionChange">
                 <el-table-column fixed prop="ID" label="工号" width="75" sortable>
                 </el-table-column>

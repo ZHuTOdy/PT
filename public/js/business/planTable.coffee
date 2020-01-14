@@ -125,7 +125,11 @@ planTable = new Vue({
         dialogVisible:false
         dialogVisible_2:false
         aPlan: {}
-        uPlan: {}
+        uPlan: {
+            "_id": "",
+            "AllNumber": "",
+            "remarks": "",
+        }
         permission: plan.$data.value
         year: year.$data.value
         month: month.$data.value

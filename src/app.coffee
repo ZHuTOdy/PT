@@ -67,6 +67,7 @@ global.user_db.bind "takeJobChannel"
 global.user_db.bind "resume"
 global.user_db.bind "conf"
 global.user_db.bind "appNotice"
+global.user_db.bind "rule"
 # global.user_db.bind "test" #使用collections  test
 
 
@@ -96,3 +97,4 @@ require "./user"
 require "./pt_trainRoute"
 require "./takeJob"
 require "./notice"
+require "./onWork"

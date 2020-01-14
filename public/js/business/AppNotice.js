@@ -68,10 +68,10 @@ var content = new Vue({
 })
 console.log("项目：", projects);
 init_pro = function () {
-    for (var i = 0; i < projects.length; i++) {
+    for (var i = 0; i < projectArr.length; i++) {
         project.$data.options[i] = {}
-        project.$data.options[i]["label"] = projects[i]["shortName"];
-        project.$data.options[i]["value"] = projects[i]["project"];
+        project.$data.options[i]["label"] = projectArr[i]["shortName"];
+        project.$data.options[i]["value"] = projectArr[i]["project"];
     }
 }
 init_pro();

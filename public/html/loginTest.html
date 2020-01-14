@@ -189,7 +189,7 @@
 </div>
 
 <script>
-	var projects, nickname, pt
+	var projectArr, nickname, pt
 	var yearRange = ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"];
     var monthRange = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 	var login = new Vue({
@@ -260,7 +260,7 @@
 					console.log("返回数据：：", data)
 					if (data.status == "success") {
 						that.formInline.nickname = data.data.nickname;
-						projects = data.projects
+						projectArr = data.projects
 						nickname = data.data.nickname;
 						pt = data.pt
 						that.$message.success(data.data.nickname + "登录成功！")
@@ -392,7 +392,7 @@
 			if (data.status == "success") {
 				login.formInline.nickname = data.data.nickname;
 				// projects = data.projects
-				projects = [{"shortName":"B0001","project":"中意理赔"}]
+				projectArr = data.projects
 				nickname = data.data.nickname;
 				pt = data.pt
 				login.$message.success(data.data.nickname + "登录成功！")

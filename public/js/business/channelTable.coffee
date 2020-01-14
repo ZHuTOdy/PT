@@ -7,7 +7,17 @@ channelTable = new Vue({
         total: 0
         dialogVisible:false
         dialogVisible_edit:false
-        editChannel:{}
+        editChannel:{
+           "websiteName": ""
+           "URL": ""
+           "ID": ""
+           "password": ""
+           "orMoney": ""
+           "effect": ""
+           "orUse": ""
+           "remarks": ""
+           "_id": ""
+        }
         aChannel:{}
     },
     methods: 

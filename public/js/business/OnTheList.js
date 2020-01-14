@@ -58,14 +58,14 @@ var level = new Vue({
     el: "#level",
     data: {
         options: [{
-            "lebel":"高",
-            "value":"高"
-        },{
-            "lebel":"中",
-            "value":"中" 
-        },{
-            "lebel":"低",
-            "value":"低"
+            "lebel": "高",
+            "value": "高"
+        }, {
+            "lebel": "中",
+            "value": "中"
+        }, {
+            "lebel": "低",
+            "value": "低"
         }],
         value: "中"
     },
@@ -80,11 +80,11 @@ var status = new Vue({
     el: "#status",
     data: {
         options: [{
-            "lebel":"开通",
-            "value":"开通"
-        },{
-            "lebel":"关闭",
-            "value":"关闭"
+            "lebel": "开通",
+            "value": "开通"
+        }, {
+            "lebel": "关闭",
+            "value": "关闭"
         }],
         value: "开通"
     },
@@ -200,17 +200,18 @@ var ListTable = new Vue({
                 type: "success",
                 position: "bottom-right"
             });
-        }
+        },
+        update: function (index, data) {}
     }
 });
 
 init_list = function () {}
 
 init_pro = function () {
-    for (var i = 0; i < projects.length; i++) {
+    for (var i = 0; i < projectArr.length; i++) {
         p = {
-            "lebel": projects[i]["shortName"],
-            "value": projects[i]["project"]
+            "label": projectArr[i]["shortName"],
+            "value": projectArr[i]["project"]
         }
         projects.options.push(p);
     }
