@@ -85,7 +85,6 @@ var ruleTable = new Vue({
             this.dialogVisible2 = true;
         },
         handleDelete: function (index, data) {
-            console.log("删除数据")
             var _id = data._id;
             socket.emit("onWork.deleteRule", _id, function(res){
                 ruleTable.notice1();
@@ -131,7 +130,6 @@ var ruleTable = new Vue({
 
 
 init_list = function () {
-    console.log("表格初始化")
     var page, pageSize;
     page = ruleTable.$data.page;
     pageSize = ruleTable.$data.pageSize;
