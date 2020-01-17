@@ -6,7 +6,6 @@ var project = new Vue({
     },
     methods: {
         handleChange: function () {
-            console.log("切换项目")
         }
     }
 });
@@ -25,7 +24,6 @@ var permission = new Vue({
     },
     methods: {
         handleChange: function () {
-            console.log("切换权限")
         }
     }
 })
@@ -66,7 +64,7 @@ var content = new Vue({
         }
     }
 })
-console.log("项目：", projects);
+console.log("项目：", projectArr);
 init_pro = function () {
     for (var i = 0; i < projectArr.length; i++) {
         project.$data.options[i] = {}

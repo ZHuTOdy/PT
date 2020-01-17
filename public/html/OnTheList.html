@@ -81,10 +81,10 @@
     <div class="text"></div>
     <div id="aboutData">
         <template>
-            <el-button type="primary" @click="download">下载数据</el-button><a id="jstoxls"></a>
-            <el-button type="primary" @click="click">导入数据</el-button>
+            <el-button type="primary" @click="download" :loading="loadingDownload">下载数据</el-button><a id="jstoxls"></a>
+            <el-button type="primary" @click="click" :loading="loadingUpload">导入数据</el-button>
             <input type="file" style="display: none" id="upload" ref="uploadFile" @change="upload">
-            <el-button type="danger" @click="deleteAll">删除</el-button>
+            <el-button type="danger" @click="deleteAll" :loading="loadingDelete">删除</el-button>
         </template>
     </div>
     <div id="ListTable">
@@ -92,6 +92,7 @@
         <template>
             <el-table :data="items" style="width: 100%;" :default-sort="{prop: 'ID', order: 'descending'}" stripe
                 border @selection-change="handleSelectionChange">
+                <el-table-column type="selection" width="40"></el-table-column>
                 <el-table-column fixed prop="ID" label="工号" width="75" sortable>
                 </el-table-column>
                 <el-table-column prop="nickname" label="姓名" width="75" sortable>
@@ -118,7 +119,7 @@
                 </el-table-column>
                 <el-table-column label="操作" width="100">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="update(scope.$index,scope.row)">
+                        <el-button size="mini" @click="handleUpdate(scope.$index,scope.row)">
                             <i class="el-icon-delete">修改</i>
                         </el-button>
                     </template>

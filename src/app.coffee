@@ -68,6 +68,7 @@ global.user_db.bind "resume"
 global.user_db.bind "conf"
 global.user_db.bind "appNotice"
 global.user_db.bind "rule"
+global.user_db.bind "OnWork"
 # global.user_db.bind "test" #使用collections  test
 
 

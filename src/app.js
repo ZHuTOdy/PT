@@ -85,6 +85,8 @@
 
   global.user_db.bind("rule");
 
+  global.user_db.bind("OnWork");
+
   // global.user_db.bind "test" #使用collections  test
 
   //数据库游标，防止内存溢出
