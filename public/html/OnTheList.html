@@ -103,19 +103,19 @@
                 </el-table-column>
                 <el-table-column prop="project" label="项目" width="90" sortable>
                 </el-table-column>
-                <el-table-column prop="permission" label="权限等级" width="150" sortable>
+                <el-table-column prop="permission" label="权限等级" width=auto sortable>
                 </el-table-column>
                 <el-table-column prop="level" label="级别" width="75" sortable>
                 </el-table-column>
-                <el-table-column prop="OnDate" label="上岗日期" width="150" sortable>
+                <el-table-column prop="OnDate" label="上岗日期" width=auto sortable>
                 </el-table-column>
-                <el-table-column prop="OnLineDate" label="上线时间" width="150" sortable>
+                <el-table-column prop="OnLineDate" label="上线时间" width=auto sortable>
                 </el-table-column>
-                <el-table-column prop="remark" label="备注" width="100" sortable>
+                <el-table-column prop="remark" label="备注" width="100" sortable :show-overflow-tooltip="true">
                 </el-table-column>
                 <el-table-column prop="status" label="权限状态" width="110" sortable>
                 </el-table-column>
-                <el-table-column prop="closeDate" label="权限关闭时间" width="150" sortable>
+                <el-table-column prop="closeDate" label="权限关闭时间" width=auto sortable>
                 </el-table-column>
                 <el-table-column label="操作" width="100">
                     <template slot-scope="scope">

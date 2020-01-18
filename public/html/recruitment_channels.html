@@ -19,9 +19,9 @@
                 stripe border>
                 <el-table-column fixed prop="websiteName" label="网站名称" width="120">
                 </el-table-column>
-                <el-table-column prop="URL" label="网址" width="160">
+                <el-table-column prop="URL" label="网址" width=auto>
                 </el-table-column>
-                <el-table-column prop="ID" label="账号" width="130">
+                <el-table-column prop="ID" label="账号" width=auto>
                 </el-table-column>
                 <el-table-column prop="password" label="密码" width="120">
                 </el-table-column>
@@ -31,7 +31,7 @@
                 </el-table-column>
                 <el-table-column prop="orUse" label="是否使用中" width="120" sortable>
                 </el-table-column>
-                <el-table-column prop="remarks" label="其他说明" width="120">
+                <el-table-column prop="remarks" label="其他说明" width=auto :show-overflow-tooltip="true">
                 </el-table-column>
                 <el-table-column prop="updateDate" label="招聘信息更新时间" width="160" sortable>
                 </el-table-column>
