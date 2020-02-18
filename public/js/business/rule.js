@@ -162,3 +162,4 @@ init_pro = function () {
     }
 }
 init_pro();
+init_list();
