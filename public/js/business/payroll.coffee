@@ -1,28 +1,24 @@
 month = new Vue({
-  el: "#month",
-  data: {
-    month : ""
-  },
-  methods: {
-    handleChange: (month)->
-      monthlyReport.$data.month = month
-      init_list()
-    # handleChange: ()->
-    #   init_list()
-    
-  }
+	el: "#month",
+	data: {
+		month : ""
+	},
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
 name = new Vue({
-  el: "#name",
-  data: {
-    username: ""
-    nickname: ""
-  },
-  methods: {
-    handleChange: ()->
-      init_list()
-  }
+	el: "#name",
+	data: {
+		username: ""
+		nickname: ""
+	},
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
 
@@ -36,14 +32,14 @@ payrollTable = new Vue({
 		Selection: []
 	},
 	methods:{
+		handleSelectionChange:()->
+			init_list() 
 		handleSizeChange: (pageSize)->
-			payrollTable.$data.pageSize = pageSize
+			dailyReportTable.$data.pageSize = pageSize
 			init_list()
 		handleCurrentChange: (page)->
-			payrollTable.$data.page = page
+			dailyReportTable.$data.page = page
 			init_list()
-		handleSelectionChange: (val)->
-			this.Selection = val
 	}	
 })
 
@@ -53,7 +49,7 @@ init_list = ()->
 	month = monthlyReport.$data.month
 	username = name.$data.username
 	nickname = name.$data.nickname
-	# socket.emit "report.list", {"month":{$regex:month},"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
+	# socket.emit "report.xxx", {"month":{$regex:month},"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
 	# 	return alert( res.err ) if res.err
 	# 	Object.assign( payrollTable.$data, res ) 
 

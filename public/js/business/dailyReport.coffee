@@ -1,77 +1,78 @@
-code = new Vue({
-  el: "#code",
-  data: {
-    props: { multiple: true },
-    options: [{
-      value: 'all',
-      label: '全部',
-      children: [{
-        value: "pro_QY",
-        label: '契约',
-        children: [
-          { value: "B0001", label: 'B0001' },
-          { value: "B0002", label: 'B0002' },
-          { value: "B0003", label: 'B0003' },
-          { value: "B0005", label: 'B0005' },
-          { value: "B0006", label: 'B0006' },
-          { value: "B0007", label: 'B0007' },
-          { value: "B0009", label: 'B0009' },
-          { value: "B0011", label: 'B0011' },
-          { value: "B0012", label: 'B0012' },
-          { value: "B0014", label: 'B0014' }
-        ]
-      }, {
-        value: "pro_BQ",
-        label: '保全',
-        children: [
-          { value: "B0051", label: 'B0051' },
-          { value: "B0053", label: 'B0053' },
-          { value: "B0054", label: 'B0054' },
-          { value: "B0055", label: 'B0055' },
-          { value: "B0056", label: 'B0056' },
-          { value: "B0057", label: 'B0057' }
-        ]
-      }, {
-        value: "pro_LP",
-        label: '理赔',
-        children: [
-          { value: "B0101", label: 'B0101' },
-          { value: "B0103", label: 'B0103' },
-          { value: "B0106", label: 'B0106' },
-          { value: "B0110", label: 'B0110' },
-          { value: "B0111", label: 'B0111' },
-          { value: "B0113", label: 'B0113' },
-          { value: "B0114", label: 'B0114' }
-        ]
-      }, {
-        value: "pro_JH",
-        label: '交行',
-        children: [
-          { value: "B0101", label: 'B0101' }          
-        ]
-      }]
-    }]
-  },  
-  methods: {
-    handleChange: (code)->
-      dailyReport.$data.code = code
-      init_list()
-  }
+projectVue = new Vue({
+	el: "#project",
+	data: {
+		options: [{
+			value: 'all',
+			label: '全部',
+			children: [{
+				value: "pro_QY",
+				label: '契约',
+				children: [
+					{ value: "百年新契约", label: 'B0001' },
+					{ value: "华夏人寿", label: 'B0002' },
+					{ value: "信泰新契约", label: 'B0003' },
+					{ value: "农银新契约", label: 'B0005' },
+					{ value: "幸福新契约", label: 'B0006' },
+					{ value: "北大方正新契约", label: 'B0009' },
+					{ value: "同方全球新契约", label: 'B0011' },
+					{ value: "上海人寿契约", label: 'B0012' },
+					{ value: "前海人寿契约", label: 'B0014' }
+					{ value: "合众人寿契约", label: 'B0016' },
+					{ value: "横琴新契约", label: 'B0017' }
+				]
+			}, {
+				value: "pro_BQ",
+				label: '保全',
+				children: [
+					{ value: "太平人寿", label: 'B0051' },
+					{ value: "百年保全", label: 'B0053' },
+					{ value: "上海人寿保全", label: 'B0054' },
+					{ value: "中意保全", label: 'B0055' },
+					{ value: "民生人寿保全", label: 'B0056' },
+					{ value: "合众人寿保全", label: 'B0058' },
+					{ value: "新合众人寿保全", label: 'B0059' }
+				]
+			}, {
+				value: "pro_LP",
+				label: '理赔',
+				children: [
+					{ value: "民生理赔", label: 'B0101' },
+					{ value: "广西贵州国寿理赔", label: 'B0103' },
+					{ value: "陕西国寿理赔", label: 'B0106' },
+					{ value: "新疆国寿理赔", label: 'B0110' },
+					{ value: "云南国寿理赔", label: 'B0111' },
+					{ value: "百年理赔", label: 'B0113' },
+					{ value: "华夏理赔", label: 'B0114' },
+					{ value: "华夏人寿团险理赔", label: 'B0116' },
+					{ value: "北大方正理赔", label: 'B0117' },
+					{ value: "中意理赔", label: 'B0118' },
+				]
+			}, {
+				value: "pro_JH",
+				label: '交行',
+				children: [
+					{ value: "交通银行大平台", label: 'B0101' }          
+				]
+			}]
+		}],
+		value: ''
+	},  
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
+
 date = new Vue({
-  el: "#date",
-  data: {
-    date : ""
-  },
-  methods: {
-    handleChange: (date)->
-      dailyReport.$data.date = date
-      init_list()
-    # handleChange: ()->
-    #   init_list()
-    
-  }
+	el: "#date",
+	data: {
+		date : ""
+	},
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
 
@@ -84,29 +85,35 @@ dailyReportTable = new Vue({
 		pageSize: 10
 		total: 0
 		Selection: []
-		# code: code.$data.options.value
-		# fromTime : date.$data.date[0] || "2000-01-01"
-		# toTime : date.$data.date[1] || "2111-12-31"
 	},
 	methods:{
+		handleSelectionChange:()->
+			init_list() 
 		handleSizeChange: (pageSize)->
 			dailyReportTable.$data.pageSize = pageSize
 			init_list()
 		handleCurrentChange: (page)->
 			dailyReportTable.$data.page = page
 			init_list()
-	}
-	
+	}	
 })
 
 init_list = ()->
 	page = dailyReportTable.$data.page
 	pageSize = dailyReportTable.$data.pageSize
-	code = dailyReport.$data.code
-	fromTime = date.$data.date[0] || "2000-01-01"
-	toTime = date.$data.date[1] || "2111-12-31"
-	socket.emit "report.list", {"code" : code, "date":{$gte:fromTime, $lte:toTime },"week" :{$regex:week}}, page, pageSize,  (res)->
+	project = get_project()
+	fromTime = date.$data.date[0] || ""
+	toTime = date.$data.date[1] || ""
+	socket.emit "report.list", {"project" : project, "date":{$gte:fromTime, $lte:toTime }}, page, pageSize,  (res)->
 		return alert( res.err ) if res.err
 		Object.assign( dailyReportTable.$data, res ) 
+
+get_project = ()->
+	pro_arr = []
+	pro = projectVue.$data.value
+	for each in pro
+		pro_arr.push each[each.length-1]
+	return pro_arr
+
 
 init_list()

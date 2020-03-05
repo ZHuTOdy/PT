@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+  <title>周报表</title>
+  <style>
+    #project {
+      width: 325px;
+      float: left;
+    }
+
+    #week {
+      width: 800px;
+      float: left;
+    }
+
+    #select {
+      height: 70px;
+    }
+
+    .text {
+      height: 20px;
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="project">
+    <span style="float: left; line-height: 40px;">项目编码：</span>
+    <template>
+      <el-cascader :options="options" :props="{ expandTrigger:'hover',multiple:true }" :show-all-levels="false" collapse-tags clearable @change="handleChange">
+      </el-cascader>
+    </template>
+  </div>
+
+  <div id="week">
+    <span style="float: left; line-height: 40px;">周：</span>
+    <template>
+      <el-date-picker v-model="week" type="week" format="yyyy 第 WW 周" placeholder="选择周">
+      </el-date-picker>
+    </template>
+    <div class="text"></div>
+  </div>
+
+  
+  <div id="weeklyReportTable">   
+    <template>
+      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}" stripe
+        border @selection-change="handleSelectionChange">
+        <el-table-column fixed prop="date" label="日期" width="100" sortable></el-table-column>        
+        <el-table-column fixed prop="pro_code" label="项目编码" width="100"></el-table-column>
+        <el-table-column prop="total_bill" label="总单量" width="100"></el-table-column>
+        <el-table-column prop="num_op1" label="1码上线人次" width="120"></el-table-column>
+        <el-table-column prop="num_op2" label="2码上线人次" width="120"></el-table-column>
+        <el-table-column prop="total_ratio" label="总产量占比" width="120"></el-table-column>
+        <el-table-column prop="op1_ratio" label="1码产量占比" width="120"></el-table-column>
+        <el-table-column prop="op2_ratio" label="2码产量占比" width="120"></el-table-column>
+        <el-table-column prop="op1_right" label="1码系统准确率" width="120"></el-table-column>
+        <el-table-column prop="op2_right" label="2码系统准确率" width="120"></el-table-column>
+        <el-table-column prop="remarks" label="备注" width="120"></el-table-column>
+      </el-table>
+    </template>
+    <div class="text"></div>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+    :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize"
+    layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
+  </div>
+
+
+  <script>
+  </script>
+</body>
+<script src="../js/business/weeklyReport.js"></script>

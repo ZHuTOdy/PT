@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<head>
+  <title>客户投诉数据汇总</title>
+  <style>
+    #month {
+      width: 275px;
+      float: left;
+    }
+
+    #project {
+      width: 300px;
+      float: left;
+    }
+
+    #name {
+      width: 575px;
+      float: left;
+    }  
+
+    #select {
+      height: 70px;
+    }
+
+    .text {
+      height: 20px;
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="month">
+    <span style="float: left; line-height: 40px;">月份：</span>
+    <template>
+      <el-date-picker v-model="month" type="month" placeholder="选择月" @change="handleChange">
+      </el-date-picker>
+    </template>
+  </div>
+
+  <div id="project">
+    <span style="float: left; line-height: 40px;">项目编码：</span>
+    <template>
+      <el-cascader :options="options" :props="{ expandTrigger:'hover',multiple:true }" :show-all-levels="false" collapse-tags clearable @change="handleChange">
+      </el-cascader>
+    </template>
+  </div>
+
+  <div id="name">
+    <el-row :gutter="10">
+      <span style="float: left; line-height: 40px;">差错人工号：</span>
+      <el-col :span="3">
+        <template>
+          <el-input v-model="username" placeholder="工号" @change="handleChange"></el-input>
+        </template>
+			</el-col>
+
+  
+      <span style="float: left; line-height: 40px;">差错人姓名：</span>
+      <el-col :span="3">
+        <template>
+          <el-input v-model="nickname" placeholder="姓名" @change="handleChange2"></el-input>
+        </template>
+      </el-col>
+      <el-button type="primary" @click="click">导入数据</el-button>
+      <el-button type="primary" @click="download">导出数据</el-button><a id="jstoxls"></a> 
+      <div class="text"></div>
+    </el-row>   
+  </div>
+
+  
+  <div id="complaintTable">   
+    <template>
+      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}" stripe
+        border @selection-change="handleSelectionChange">       
+        <el-table-column fixed prop="month" label="月份" width="200" sortable></el-table-column>
+        <el-table-column prop="project" label="项目" width="200"></el-table-column>
+        <el-table-column prop="username" label="差错人工号" width="200"></el-table-column>
+        <el-table-column prop="nickname" label="差错人姓名" width="200"></el-table-column>
+        <el-table-column prop="fine" label="扣罚总金额" width="200"></el-table-column>
+        <el-table-column prop="remarks" label="备注" width="165"></el-table-column>
+      </el-table>
+    </template>
+    <div class="text"></div>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+    :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize"
+    layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
+  </div>
+
+
+  <script>
+  </script>
+</body>
+<script src="../js/business/complaint.js"></script>

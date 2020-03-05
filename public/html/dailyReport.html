@@ -3,61 +3,57 @@
 <head>
   <title>日报表</title>
   <style>
-    #code {
-      width: 365px;
+    #project {
+      width: 325px;
       float: left;
     }
 
-    #dateRange {
+    #date {
       width: 800px;
       float: left;
     }
 
-    /* #dailyReportTable {
-      float: left;
-    } */
     #select {
       height: 70px;
     }
 
     .text {
       height: 20px;
-      width: 100px;
+      width: 80px;
     }
   </style>
 </head>
 
 <body>
-  <div id="code">
+  <div id="project">
     <span style="float: left; line-height: 40px;">项目编码：</span>
     <template>
-      <el-select v-model="value" placeholder="请选择" @change="handleChange">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
+      <el-cascader v-model="value" :options="options" :props="{ expandTrigger:'hover',multiple:true }" :show-all-levels="false" collapse-tags clearable @change="handleChange">
+      </el-cascader>
     </template>
   </div>
 
-  <div id="dateRange">
+  <div id="date">
     <span style="float: left; line-height: 40px;">日期范围：</span>
     <template>
-      <el-date-picker v-model="value" type="daterange" value-format="yyyy-MM-dd" align="right" unlink-panels range-separator="至"
-        start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions" @change="handleChange">日期范围：</el-date-picker>
+      <el-date-picker v-model="date" type="daterange" value-format="yyyyMMdd" unlink-panels
+        range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" @change="handleChange"></el-date-picker>
+      </el-date-picker>
       <el-button type="primary" @click="download">数据下载</el-button><a id="jstoxls"></a>
     </template>
     <div class="text"></div>
   </div>
 
-  
-  <div id="dailyReportTable">   
+
+  <div id="dailyReportTable">
     <template>
-      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}" stripe
-        border @selection-change="handleSelectionChange">
-        <el-table-column fixed prop="date" label="日期" width="120"></el-table-column>        
-        <el-table-column fixed prop="pro_code" label="项目编码" width="120"></el-table-column>
-        <el-table-column prop="total_list" label="总单量" width="100"></el-table-column>
-        <el-table-column prop="num_op1" label="1码上线人次" width="100"></el-table-column>
-        <el-table-column prop="num_op2" label="2码上线人次" width="100"></el-table-column>
+      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}"
+        stripe border @selection-change="handleSelectionChange">
+        <el-table-column fixed prop="date" label="日期" width="100" sortable></el-table-column>
+        <el-table-column fixed prop="pro_code" label="项目编码" width="100"></el-table-column>
+        <el-table-column prop="total_bill" label="总单量" width="100"></el-table-column>
+        <el-table-column prop="num_op1" label="1码上线人次" width="120"></el-table-column>
+        <el-table-column prop="num_op2" label="2码上线人次" width="120"></el-table-column>
         <el-table-column prop="total_ratio" label="总产量占比" width="120"></el-table-column>
         <el-table-column prop="op1_ratio" label="1码产量占比" width="120"></el-table-column>
         <el-table-column prop="op2_ratio" label="2码产量占比" width="120"></el-table-column>
@@ -68,13 +64,10 @@
     </template>
     <div class="text"></div>
     <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
-    :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize"
-    layout="total, sizes, prev, pager, next, jumper" :total="total">
+      :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
     </el-pagination>
   </div>
 
-
-  <script>
-  </script>
 </body>
-<script src="../js/business/dailyReport.js"></script>
+<script src="/js/business/dailyReport.js"></script>

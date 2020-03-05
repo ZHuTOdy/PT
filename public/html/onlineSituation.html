@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<head>
+  <title>上线情况</title>
+  <style>
+    #date {
+      width: 450px;
+      float: left;
+    }
+
+    #project {
+      width: 500px;
+      float: left;
+    }    
+
+    #select {
+      height: 70px;
+    }
+
+    .text {
+      height: 20px;
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="date">
+    <span style="float: left; line-height: 40px;">日期范围：</span>
+    <template>
+      <el-date-picker v-model="date" type="daterange" value-format="yyyyMMdd" align="right" unlink-panels range-separator="至"
+        start-placeholder="开始日期" end-placeholder="结束日期" @change="handleChange"></el-date-picker>
+      </el-date-picker>
+    </template>
+  </div>
+
+  <div id="project">
+    <span style="float: left; line-height: 40px;">项目编码：</span>
+    <template>
+      <!-- <el-select v-model="value" placeholder="请选择" @change="handleChange">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select> -->
+      <el-cascader :options="options" :props="{ multiple:true }" :show-all-levels="false" collapse-tags clearable @change="handleChange">
+      </el-cascader>
+      <el-button type="primary" @click="download">数据下载</el-button><a id="jstoxls"></a>
+      <div class="text"></div>
+    </template>
+  </div>
+
+  
+  <div id="onlineTable">   
+    <template>
+      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}" stripe
+        border @selection-change="handleSelectionChange">
+        <el-table-column fixed prop="date" label="日期" width="100" sortable></el-table-column>        
+        <el-table-column fixed prop="pro_code" label="项目编码" width="100"></el-table-column>
+        <el-table-column prop="type" label="类别" width="100"></el-table-column>
+        <el-table-column prop="nine" label="9点" width="100"></el-table-column>
+        <el-table-column prop="ten" label="10点" width="100"></el-table-column>
+        <el-table-column prop="eleven" label="11点" width="100"></el-table-column>
+        <el-table-column prop="twelve" label="12点" width="100"></el-table-column>
+        <el-table-column prop="thirteen" label="13点" width="100"></el-table-column>
+        <el-table-column prop="fourteen" label="14点" width="100"></el-table-column>
+        <el-table-column prop="fifteen" label="15点" width="100"></el-table-column>
+        <el-table-column prop="sixteen" label="16点" width="100"></el-table-column>
+        <el-table-column prop="seventeen" label="17点" width="100"></el-table-column>
+        <el-table-column prop="eighteen" label="18点" width="100"></el-table-column>
+        <el-table-column prop="nineteen" label="19点" width="100"></el-table-column>
+        <el-table-column prop="twenty" label="20点" width="100"></el-table-column>
+        <el-table-column prop="twenty-one" label="21点" width="100"></el-table-column>
+        <el-table-column prop="twenty-two" label="22点" width="100"></el-table-column>
+        <el-table-column prop="twenty-three" label="23点" width="100"></el-table-column>
+        <el-table-column prop="twenty-four" label="24点" width="100"></el-table-column>
+        <el-table-column prop="sum" label="合计" width="100"></el-table-column>
+      </el-table>
+    </template>
+    <div class="text"></div>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+    :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize"
+    layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
+  </div>
+
+
+  <script>
+  </script>
+</body>
+<script src="../js/business/onlineSituation.js"></script>

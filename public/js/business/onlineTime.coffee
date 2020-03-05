@@ -1,28 +1,24 @@
 date = new Vue({
-  el: "#date",
-  data: {
-    date : ""
-  },
-  methods: {
-    handleChange: (date)->
-      dailyReport.$data.date = date
-      init_list()
-    # handleChange: ()->
-    #   init_list()
-    
-  }
+	el: "#date",
+	data: {
+		date : ""
+	},
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
 name = new Vue({
-  el: "#name",
-  data: {
-    username: ""
-    nickname: ""
-  },
-  methods: {
-    handleChange: ()->
-      init_list()
-  }
+	el: "#name",
+	data: {
+		username: ""
+		nickname: ""
+	},
+	methods: {
+		handleChange: ()->
+			init_list()
+	}
 });
 
 
@@ -36,25 +32,25 @@ timeTable = new Vue({
 		Selection: []
 	},
 	methods:{
+		handleSelectionChange:()->
+			init_list() 
 		handleSizeChange: (pageSize)->
-			timeTable.$data.pageSize = pageSize
+			dailyReportTable.$data.pageSize = pageSize
 			init_list()
 		handleCurrentChange: (page)->
-			timeTable.$data.page = page
+			dailyReportTable.$data.page = page
 			init_list()
-		handleSelectionChange: (val)->
-			this.Selection = val
 	}	
 })
 
 init_list = ()->
 	page = timeTable.$data.page
 	pageSize = timeTable.$data.pageSize
-	fromTime = date.$data.date[0] || "2000-01-01"
-	toTime = date.$data.date[1] || "2111-12-31"
+	romTime = date.$data.date[0] || ""
+	toTime = date.$data.date[1] || ""
 	username = name.$data.username
 	nickname = name.$data.nickname
-	# socket.emit "report.list", {"date":{$gte:fromTime, $lte:toTime },"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
+	# socket.emit "report.xxx", "date":{$gte:fromTime, $lte:toTime },"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
 	# 	return alert( res.err ) if res.err
 	# 	Object.assign( timeTable.$data, res ) 
 

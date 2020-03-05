@@ -40,7 +40,7 @@ init_list = ()->
 	nickname1 = name.$data.nickname
 	username2 = name.$data.username
 	nickname2 = name.$data.nickname
-	# socket.emit "report.list",{username1" :{$regex:username1},"code" : code,"nickname1" :{$regex:nickname1},username2" :{$regex:username2},"nickname2" :{$regex:nickname2}},page, pageSize,  (res)->
+	# socket.emit "report.xxx",{username1" :{$regex:username1},"code" : code,"nickname1" :{$regex:nickname1},username2" :{$regex:username2},"nickname2" :{$regex:nickname2}},page, pageSize,  (res)->
 	# 	return alert( res.err ) if res.err
 	# 	Object.assign( payrollTable.$data, res ) 
 

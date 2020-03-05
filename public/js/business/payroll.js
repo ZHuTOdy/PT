@@ -8,15 +8,12 @@
       month: ""
     },
     methods: {
-      handleChange: function(month) {
-        monthlyReport.$data.month = month;
+      handleChange: function() {
         return init_list();
       }
     }
   });
 
-  // handleChange: ()->
-  //   init_list()
   name = new Vue({
     el: "#name",
     data: {
@@ -40,16 +37,16 @@
       Selection: []
     },
     methods: {
+      handleSelectionChange: function() {
+        return init_list();
+      },
       handleSizeChange: function(pageSize) {
-        payrollTable.$data.pageSize = pageSize;
+        dailyReportTable.$data.pageSize = pageSize;
         return init_list();
       },
       handleCurrentChange: function(page) {
-        payrollTable.$data.page = page;
+        dailyReportTable.$data.page = page;
         return init_list();
-      },
-      handleSelectionChange: function(val) {
-        return this.Selection = val;
       }
     }
   });
@@ -63,7 +60,7 @@
     return nickname = name.$data.nickname;
   };
 
-  // socket.emit "report.list", {"month":{$regex:month},"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
+  // socket.emit "report.xxx", {"month":{$regex:month},"username" :{$regex:username},"nickname" :{$regex:nickname}},page, pageSize,  (res)->
   // 	return alert( res.err ) if res.err
   // 	Object.assign( payrollTable.$data, res ) 
   init_list();

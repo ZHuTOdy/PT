@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<head>
+  <title>工资表</title>
+  <style>
+    #month {
+      width: 300px;
+      float: left;
+    }
+
+    #name {
+      width: 700px;
+      float: left;
+    }  
+
+    #select {
+      height: 70px;
+    }
+
+    .text {
+      height: 20px;
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="month">
+    <span style="float: left; line-height: 40px;">月份：</span>
+    <template>
+      <el-date-picker v-model="month" type="month" placeholder="选择月" @change="handleChange">
+      </el-date-picker>
+    </template>
+  </div>
+
+  <div id="name">
+    <el-row :gutter="10">
+      <span style="float: left; line-height: 40px;">工号：</span>
+      <el-col :span="6">
+        <template>
+          <el-input v-model="username" placeholder="请输入工号" @change="handleChange"></el-input>
+        </template>
+			</el-col>
+
+  
+      <span style="float: left; line-height: 40px;">姓名：</span>
+      <el-col :span="8">
+        <template>
+          <el-input v-model="nickname" placeholder="请输入姓名" @change="handleChange2"></el-input>
+        </template>
+      </el-col>
+      <el-button type="primary" @click="download">数据下载</el-button><a id="jstoxls"></a>
+      <div class="text"></div>
+    </el-row>   
+  </div>
+
+  
+  <div id="payrollTable">   
+    <template>
+      <el-table :data="items" style="width: 100%" height="450" :default-sort="{prop: 'date', order: 'descending'}" stripe
+        border @selection-change="handleSelectionChange">       
+        <el-table-column fixed prop="username" label="工号" width="90" sortable></el-table-column>
+        <el-table-column prop="nickname" label="姓名" width="90"></el-table-column>
+        <el-table-column prop="gender" label="性别" width="90"></el-table-column>
+        <el-table-column prop="B0001" label="B0001" width="90"></el-table-column>
+        <el-table-column prop="B0002" label="B0002" width="90"></el-table-column>
+        <el-table-column prop="B0003" label="B0003" width="90"></el-table-column>
+        <el-table-column prop="B0005" label="B0005" width="90"></el-table-column>
+        <el-table-column prop="B0006" label="B0006" width="90"></el-table-column>
+        <el-table-column prop="B0007" label="B0007" width="90"></el-table-column>
+        <el-table-column prop="B0009" label="B0009" width="90"></el-table-column>
+        <el-table-column prop="B0011" label="B0011" width="90"></el-table-column>
+        <el-table-column prop="B0012" label="B0012" width="90"></el-table-column>
+        <el-table-column prop="B0014" label="B0014" width="90"></el-table-column>
+        <el-table-column prop="B0051" label="B0051" width="90"></el-table-column>
+        <el-table-column prop="B0053" label="B0053" width="90"></el-table-column>
+        <el-table-column prop="B0054" label="B0054" width="90"></el-table-column>
+        <el-table-column prop="B0055" label="B0055" width="90"></el-table-column>
+        <el-table-column prop="B0056" label="B0056" width="90"></el-table-column>
+        <el-table-column prop="B0057" label="B0057" width="90"></el-table-column>
+        <el-table-column prop="B0101" label="B0101" width="90"></el-table-column>
+        <el-table-column prop="total_output" label="产量合计" width="90"></el-table-column>
+        <el-table-column prop="salary_output" label="产量工资" width="90"></el-table-column>
+        <el-table-column prop="mistake" label="客户差错投诉" width="120"></el-table-column>
+        <el-table-column prop="reward" label="推荐奖" width="90"></el-table-column>
+        <el-table-column prop="salary_income" label="工资收入" width="90"></el-table-column>
+        <el-table-column prop="tax" label="税额" width="90"></el-table-column>
+        <el-table-column prop="salary_final" label="最终工资" width="90"></el-table-column>
+      </el-table>
+    </template>
+    <div class="text"></div>
+    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page"
+    :page-sizes="[10, 50, 100, 500, 1000]" :page-size="pageSize"
+    layout="total, sizes, prev, pager, next, jumper" :total="total">
+    </el-pagination>
+  </div>
+
+
+  <script>
+  </script>
+</body>
+<script src="../js/business/payroll.js"></script>

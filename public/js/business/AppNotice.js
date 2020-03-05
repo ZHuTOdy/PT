@@ -6,6 +6,7 @@ var project = new Vue({
     },
     methods: {
         handleChange: function () {
+            console.log("切换项目")
         }
     }
 });
@@ -24,6 +25,7 @@ var permission = new Vue({
     },
     methods: {
         handleChange: function () {
+            console.log("切换权限")
         }
     }
 })
